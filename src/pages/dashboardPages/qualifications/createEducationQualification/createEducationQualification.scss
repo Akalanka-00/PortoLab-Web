@@ -1,0 +1,63 @@
+.education-qualification-container {
+    .education-qualification-form-container {
+        .new-education-qualification-form {
+            margin-top: 2rem;
+            padding: 0 1rem;
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            gap: 1rem;
+
+            .form-group {
+                width: 60%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1rem;
+
+                .form-label {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: var(--textColor);
+                    min-width: 10rem;
+                }
+
+                .form-input {
+                    width: 100%;
+                    padding: 0.5rem;
+                    border: 1px solid var(--softBg);
+                    background-color: var(--softBg);
+                    border-radius: 5px;
+                    font-size: 1rem;
+                    color: var(--textColor);
+                }
+
+                .date-input {
+                    width: fit-content;
+                    padding: 0.5rem 1rem;
+                }
+            }
+
+            .form-group-description {
+                width: 90%;
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .submit-form-group {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+
+                .submit-btn {
+                    width: 20%;
+                }
+            }
+        }
+    }
+}

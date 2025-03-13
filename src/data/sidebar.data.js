@@ -4,16 +4,19 @@ import { LuGraduationCap } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { SiHyperskill } from "react-icons/si";
 import OverviewPage from "../pages/dashboardPages/overview/Overview";
-import ProjectsPage from "../pages/dashboardPages/projects/viewProjects/Projects";
+import ViewProjectsPage from "../pages/dashboardPages/projects/viewProjects/ViewProjects";
+import ViewQualificationsPage from "../pages/dashboardPages/qualifications/viewQualifications/ViewQualifications";
+import TestimonialsPage from "../pages/dashboardPages/testimonials/Testimonials";
+import ViewSkillsPage from "../pages/dashboardPages/skills/viewSkills/ViewSkills";
 
 
 
 const sidebarData = [
     { title: "Home", icon: <HiHome />, link: "/overview", component: OverviewPage },
-    { title: "Projects", icon: <GoProjectRoadmap />, link: "/projects", component: ProjectsPage },
-    // { title: "Qualifications", icon: <LuGraduationCap />, link: "/qualifications", component: QualificationsPage },
-    // { title: "Testimonials", icon: <FaRegUser />, link: "/testimonials", component: TestimonialsPage },
-    // { title: "Skills", icon: <SiHyperskill />, link: "/skills", component: SkillsPage },
+    { title: "Projects", icon: <GoProjectRoadmap />, link: "/projects", component: ViewProjectsPage },
+    { title: "Qualifications", icon: <LuGraduationCap />, link: "/qualifications", component: ViewQualificationsPage },
+    { title: "Testimonials", icon: <FaRegUser />, link: "/testimonials", component: TestimonialsPage },
+    { title: "Skills", icon: <SiHyperskill />, link: "/skills", component: ViewSkillsPage },
 ];
 
 export default sidebarData;

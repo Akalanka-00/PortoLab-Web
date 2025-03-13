@@ -176,9 +176,10 @@ const CreateProjectPage = () => {
                             <input type="url" className='form-input' id="demoLink" value={formData.demo} placeholder='www.demo.com' onChange={handleChange} />
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="description" className='form-label'>Description</label>
-                            <textarea id="description" className='form-input' rows={5} value={formData.description} onChange={handleChange} placeholder='Project Description...'/>
+
+                        <div className="form-group form-group-description">
+                            <label htmlFor="project-description" className='form-label'>Description</label>
+                            <textarea type="text" id="description" className='form-input' rows={10} value={formData.description} onChange={handleChange} placeholder='Project Description...'/>
                         </div>
 
                         <div className="submit-form-group">
