@@ -36,7 +36,7 @@ a {
 [data-theme="light"] {
   --bg: white;
   --textColor: black;
-  --softBg: #f0f0f0;
+  --softBg: #dde0e6;
   --softTextColor: #626262;
   --seperatoor: #f0f0f0;
 
@@ -56,7 +56,7 @@ a {
   padding-right: 80px;
 }
 
-.portolab-button{
+.portolab-btn{
   display: inline-block;
   width: 100%;
   padding: 0.3rem 1rem;
@@ -71,11 +71,11 @@ a {
   transition: background-color 0.3s;
 }
 
-.portolab-button:hover {
+.portolab-btn:hover {
   background: #3E8DD4;
 }
 
-.portolab-button-secondary{
+.portolab-btn-secondary{
   display: inline-block;
   width: 100%;
   padding: 0.3rem 1rem;
@@ -91,7 +91,7 @@ a {
   transition: background-color 0.3s;
 }
 
-.portolab-button-secondary:hover {
+.portolab-btn-secondary:hover {
   background: #3E8DD4;
   color: var(--bg);
 }

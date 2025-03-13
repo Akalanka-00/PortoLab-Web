@@ -81,7 +81,7 @@ const RegisterPage = () => {
             </div>
 
             <div className="portolab-checkbox-input">
-            <button className='portolab-button mt-3' type='submit' onClick={handleSubmit}>Register</button>
+            <button className='portolab-btn mt-3' type='submit' onClick={handleSubmit}>Register</button>
             </div>
 
             <div className="seperator">

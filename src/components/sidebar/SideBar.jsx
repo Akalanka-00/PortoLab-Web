@@ -13,8 +13,11 @@ const SideBar = () => {
 
     useEffect(() => {
         const currentPath = window.location.pathname;
-        const currentMenu = sidebarData.find((item) => `/dashboard${item.link}` === currentPath) || sidebarData[0];
-        setActiveMenu(currentMenu.id);
+        console.log(currentPath);
+        console.log(sidebarData);
+        console.log(sidebarData.find((item) =>   currentPath.includes(`/dashboard${item.link}`)));
+        const currentMenu = sidebarData.find((item) =>   currentPath.includes(`/dashboard${item.link}`)) || sidebarData[0];
+        setActiveMenu(sidebarData.indexOf(currentMenu));
     },[]);
 
     const handleMenuClick = (id) => {

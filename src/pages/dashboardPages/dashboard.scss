@@ -1,0 +1,35 @@
+.dashboard-content-container {
+  height: 100%;
+  width: 100%;
+  padding: 0 20px;
+
+  .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid var(--softBg);
+
+    .header-title{
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--textColor);
+    }
+
+    .portolab-btn{
+        width: fit-content;
+    }
+  }
+
+  .empty-data-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    padding: 5rem;
+    color: var(--softTextColor);
+  }
+}

@@ -60,7 +60,7 @@ const LoginPage = () => {
             </div>
 
             <div className="portolab-checkbox-input">
-            <button className='portolab-button mt-3' type='submit' onClick={handleSubmit}>Login</button>
+            <button className='portolab-btn mt-3' type='submit' onClick={handleSubmit}>Login</button>
             </div>
             <div className='auth-footer'>Don't you have an account? <span onClick={()=>navigate("/register")}>Register</span></div>
 
