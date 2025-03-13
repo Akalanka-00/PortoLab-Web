@@ -1,0 +1,106 @@
+.navbar-container{
+    height: 50px;
+    width: 100%;
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg);
+    border-bottom: 1px solid var(--seperatoor);
+
+
+    .navbar-leading{
+        height: 100%;
+        color: var(--softTextColor);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 20px;
+    }
+
+    .navbar-trailing{
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 20px;
+
+        .search-box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--bg);
+            border: 1px solid var(--softTextColor);
+            border-radius: 5px;
+            padding: 0 10px;
+            color: var(--softTextColor);
+
+            input{
+                width: 150px;
+                height: 30px;
+                border-radius: 5px;
+                border: none;
+                padding: 0 10px;
+                background-color: transparent;
+                outline: none;
+                
+            }
+
+            &:focus-within{
+                border: 2px solid var(--softTextColor);
+            }
+
+            button{
+                background-color: transparent;
+                color: var(--softTextColor);
+                border: none;
+                border-radius: 5px;
+                padding: 0 10px;
+                cursor: pointer;
+            }
+        }
+
+        .option-panel{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            color: var(--softTextColor);
+
+            .option-icon{
+                cursor: pointer;
+
+                &:hover{
+                    color: var(--textColor);
+                }
+            }
+        }
+
+        .profile{
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 10px 0;
+
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+                cursor: pointer;
+            }
+        }
+
+        
+    }
+}
