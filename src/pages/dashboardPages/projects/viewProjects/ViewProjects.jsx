@@ -1,9 +1,9 @@
 import React from 'react'
-import './projects.scss'
+import './viewProjects.scss'
 import '../../dashboard.scss'
 import { useNavigate } from 'react-router-dom'
 
-const ProjectsPage = () => {
+const ViewProjectsPage = () => {
 
   const navigate = useNavigate();
   return (
@@ -20,4 +20,4 @@ const ProjectsPage = () => {
   )
 }
 
-export default ProjectsPage
+export default ViewProjectsPage

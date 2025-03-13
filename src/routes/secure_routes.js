@@ -4,6 +4,8 @@ import DashboardPage from "../pages/dashboard/Dashboard";
 import { AuthorizeAdmin } from "../middleware/Auth";
 import sidebarData from "../data/sidebar.data";
 import CreateProjectPage from "../pages/dashboardPages/projects/createProjects/CreateProject";
+import CreateEducationQualificationPage from "../pages/dashboardPages/qualifications/createEducationQualification/CreateEducationQualification";
+import CreateWorkExperiencePage from "../pages/dashboardPages/qualifications/createWorkExperience/CreateWorkExperience";
 
 function SecureRoutes() {
 
@@ -23,7 +25,10 @@ function SecureRoutes() {
           <Route key={link} path={link} element={<Component />} />
         ))}
 
-        <Route  path="projects/new" element={<CreateProjectPage />} />
+        <Route path="projects/new" element={<CreateProjectPage />} />
+        
+        <Route path="qualifications/education/new" element={<CreateEducationQualificationPage />} />
+        <Route path="qualifications/work/new" element={<CreateWorkExperiencePage />} />
 
 
       </Route>
