@@ -6,6 +6,7 @@ import sidebarData from "../data/sidebar.data";
 import CreateProjectPage from "../pages/dashboardPages/projects/createProjects/CreateProject";
 import CreateEducationQualificationPage from "../pages/dashboardPages/qualifications/createEducationQualification/CreateEducationQualification";
 import CreateWorkExperiencePage from "../pages/dashboardPages/qualifications/createWorkExperience/CreateWorkExperience";
+import CreateSkillPage from "../pages/dashboardPages/skills/createSkill/CreateSkill";
 
 function SecureRoutes() {
 
@@ -30,6 +31,7 @@ function SecureRoutes() {
         <Route path="qualifications/education/new" element={<CreateEducationQualificationPage />} />
         <Route path="qualifications/work/new" element={<CreateWorkExperiencePage />} />
 
+        <Route path="skills/new" element={<CreateSkillPage />} />
 
       </Route>
     </>
