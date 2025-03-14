@@ -73,8 +73,6 @@ const CreateProjectPage = () => {
     };
 
     const handleCreate = async () => {
-        console.log('Project Data:', formData);
-        console.log('Project Banner (Base64):', image);
         const projectAPI = new ProjectAPI();
         const project = await projectAPI.createProject({...formData, image});
         if (project) {
