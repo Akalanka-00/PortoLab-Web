@@ -2,9 +2,12 @@ import React, { useRef, useState } from 'react';
 import './createProject.scss';
 import '../../dashboard.scss';
 import placeholder from '../../../../assets/images/placeholder.jpg';
+import { ProjectAPI } from '../../../../api/project/project.api';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProjectPage = () => {
     const ref = useRef(null);
+    const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [formData, setFormData] = useState({
         title: '',
@@ -16,6 +19,8 @@ const CreateProjectPage = () => {
         github: '',
         demo: '',
         description: '',
+        isStillWorking: false,
+
     });
 
     const resetForm = () => {
@@ -29,15 +34,34 @@ const CreateProjectPage = () => {
             github: '',
             demo: '',
             description: '',
+            isStillWorking: false,
+
         })
     };
 
+    // const handleChange = (e) => {
+    //     setFormData({
+    //         ...formData,
+    //         [e.target.id]: e.target.value,
+    //     });
+    // };
+
     const handleChange = (e) => {
-        setFormData({
+        const { id, type, value, checked } = e.target;
+    
+        // Handle checkbox input separately
+        if (type === 'checkbox') {
+          setFormData({
             ...formData,
-            [e.target.id]: e.target.value,
-        });
-    };
+            [id]: checked,
+          });
+        } else {
+          setFormData({
+            ...formData,
+            [id]: value,
+          });
+        }
+      };
 
     const handleImageUpload = (event) => {
         const file = event.target.files?.[0];
@@ -48,9 +72,16 @@ const CreateProjectPage = () => {
         }
     };
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
         console.log('Project Data:', formData);
         console.log('Project Banner (Base64):', image);
+        const projectAPI = new ProjectAPI();
+        const project = await projectAPI.createProject({...formData, image});
+        if (project) {
+            navigate('/dashboard/projects');
+        }else{
+            resetForm();
+        }
     };
 
     const handleTechnologiesChange = (e) => {
@@ -134,6 +165,18 @@ const CreateProjectPage = () => {
                         </div>
 
                         <div className="form-group">
+              <input
+                type="checkbox"
+                id="isStillWorking"
+                checked={formData.isStillWorking} // Use checked instead of value
+                onChange={handleChange}
+              />
+              <label htmlFor="isStillWorking" className="form-label">
+                I am still working on this project
+              </label>
+            </div>
+
+                        <div className="form-group">
                             <label className="form-label">Project Banner</label>
                             <img src={image || placeholder} className='banner-img' onClick={() => ref.current?.click()} alt="Project Banner" />
                             <input
@@ -167,13 +210,13 @@ const CreateProjectPage = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="githubLink" className='form-label'>GitHub</label>
-                            <input type="url" className='form-input' id="githubLink" value={formData.github} placeholder='www.github.com' onChange={handleChange} />
+                            <label htmlFor="github" className='form-label'>GitHub</label>
+                            <input type="url" className='form-input' id="github" value={formData.github} placeholder='www.github.com' onChange={handleChange} />
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="demoLink" className='form-label'>Web</label>
-                            <input type="url" className='form-input' id="demoLink" value={formData.demo} placeholder='www.demo.com' onChange={handleChange} />
+                            <label htmlFor="demo" className='form-label'>Web</label>
+                            <input type="url" className='form-input' id="demo" value={formData.demo} placeholder='www.demo.com' onChange={handleChange} />
                         </div>
 
 

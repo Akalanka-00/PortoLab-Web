@@ -16,13 +16,12 @@ export class AuthAPI {
       AuthenticationType: 'google',
       CreatedDate: new Date()
     }
-    console.log(user);
     const response = await this._baseApi.post('api/auth/google',data);
     if(response.status === 200 && response.data.message ==="Success") {
         const res = response.data;
         console.log(res);
-        // localStorage.setItem('token', JSON.stringify(res));
-        // localStorage.setItem('user', JSON.stringify({name, picture, email}));
+         localStorage.setItem('token', res.token);
+          localStorage.setItem('user', JSON.stringify({id: res.userId, fname: data.Fname, lname: data.Lname, picture:data.Avatar, email:data.Email}));
       return response.data;
     }else {
         Swal.fire({
@@ -75,4 +74,4 @@ export class AuthAPI {
 
         }
     }
-}
+  }

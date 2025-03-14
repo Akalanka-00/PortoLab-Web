@@ -20,7 +20,6 @@ const SideBar = () => {
     const handleMenuClick = (id) => {
         setActiveMenu(id);
         const menu = sidebarData[id];
-        console.log(menu);
         navigate(`/dashboard${menu.link}`);
     }
     return (
