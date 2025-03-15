@@ -8,6 +8,8 @@ import ViewProjectsPage from "../pages/dashboardPages/projects/viewProjects/View
 import ViewQualificationsPage from "../pages/dashboardPages/qualifications/viewQualifications/ViewQualifications";
 import TestimonialsPage from "../pages/dashboardPages/testimonials/Testimonials";
 import ViewSkillsPage from "../pages/dashboardPages/skills/viewSkills/ViewSkills";
+import ProfilePage from "../pages/dashboardPages/profile/Profile";
+import { RiProfileLine } from "react-icons/ri";
 
 
 
@@ -17,6 +19,7 @@ const sidebarData = [
     { title: "Qualifications", icon: <LuGraduationCap />, link: "/qualifications", component: ViewQualificationsPage },
     { title: "Testimonials", icon: <FaRegUser />, link: "/testimonials", component: TestimonialsPage },
     { title: "Skills", icon: <SiHyperskill />, link: "/skills", component: ViewSkillsPage },
+    { title: "Profile", icon: <RiProfileLine  />, link: "/profile", component: ProfilePage },
 ];
 
 export default sidebarData;
