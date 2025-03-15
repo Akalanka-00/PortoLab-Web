@@ -7,7 +7,13 @@
         justify-content: center;
         align-items: flex-start;
         gap: 0.5rem;
+        padding: 1rem;
         cursor: pointer;
+        border-radius: 5px;
+
+        &:hover{
+            background-color: var(--primary);
+        }
 
         
 

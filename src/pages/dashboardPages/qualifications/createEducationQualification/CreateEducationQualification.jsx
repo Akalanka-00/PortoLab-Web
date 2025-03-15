@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './createEducationQualification.scss';
 import '../../dashboard.scss';
+import { EducationAPI } from '../../../../api/qualification/education.api';
 
 const CreateEducationQualificationPage = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const CreateEducationQualificationPage = () => {
     endYear: new Date().getFullYear(),
     endMonth: 1,
   });
+
+  const educationApi = new EducationAPI();
 
   const handleChange = (e) => {
     const { id, type, value, checked } = e.target;
@@ -42,8 +45,9 @@ const CreateEducationQualificationPage = () => {
     });
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     console.log('Education Qualification Data:', formData);
+    await educationApi.createEducation(formData);
   };
 
   return (

@@ -43,9 +43,8 @@ export class ProjectAPI {
     async getProjects() {
         const user = localStorage.getItem('user');
         const userId = JSON.parse(user).id;
-        const response = await this._baseApi.get(`api/Project/user/${userId}`);
+        const response = await this._baseApi.get(`api/project/user/${userId}`);
         if(response.status === 200) {
-            console.log(response.data);
             return response.data;
         }
         else{
