@@ -104,7 +104,7 @@
             .sidebar-item{
                 display: flex;
                 gap: 1rem;
-                align-items: center;
+                align-items: flex-end;
                 justify-content: flex-start;
                 padding: 0 0.5rem;
                 border-radius: 0.5rem;
@@ -117,10 +117,12 @@
 
                     .sidebar-icon{
                         color: var(--bg);
+                        font-size: 1rem;
                     }
 
                     .sidebar-title{
                         color: var(--bg);
+                        font-size: 0.9rem;
                     }
                 }
 

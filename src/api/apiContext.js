@@ -4,10 +4,14 @@ import Swal from 'sweetalert2';
 class BaseAPI {
   constructor() {
     this.baseUrl = process.env.REACT_APP_BASE_URL || 'https://localhost:7275';
+    this.token = localStorage.getItem('token');
+    this.user = JSON.parse(localStorage.getItem('user'));
     this.api = axios.create({
       baseURL: this.baseUrl,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`,
+        'userID': this.user ? this.user.id : null,
       },
     });
   }
@@ -47,6 +51,11 @@ class BaseAPI {
 
   handleError(error) {
     console.error('API Error:', error);
+    if(error.status === 401) {
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('user');
+      // window.location.href = '/login';
+    }
     if (error.response) {
       console.error('API Response Error:', error.response.data);
       return this.swallError('API Error', error.response.data.message);

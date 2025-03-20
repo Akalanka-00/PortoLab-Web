@@ -17,6 +17,7 @@ const ProfilePage = () => {
     });
     
     const [bio, setBio] = useState("");
+    const [prevBio, setPrevBio] = useState("");
     const [editMode, setEditMode] = useState(false);
     const [profilePic, setProfilePic] = useState(Avatar);
     const [cv, setCv] = useState("");
@@ -37,6 +38,7 @@ const ProfilePage = () => {
                 address: data.address,
             });
             setBio(data.bio || "");
+            setPrevBio(data.bio || "");
             setProfilePic(data.profile || Avatar);
             setCv(data.cv || "");
             
@@ -56,10 +58,14 @@ const ProfilePage = () => {
     };
 
     const handleBioUpdate = async () => {
-        const success = await profileAPI.updateBio({ bio });
-        if (success) {
-            Swal.fire("Success", "Bio updated successfully", "success");
+        if(prevBio!==bio){
+            const success = await profileAPI.updateBio( bio);
+            if (success) {
+                setPrevBio(bio);
+                Swal.fire("Success", "Bio updated successfully", "success");
+            }
         }
+        
     };
 
     const handleProfilePictureUpdate = async (event) => {

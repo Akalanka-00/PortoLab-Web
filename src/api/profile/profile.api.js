@@ -31,6 +31,7 @@ export class ProfileAPI {
         const userId = JSON.parse(user).id;
 
         const response = await this._baseApi.update(`api/profile/${userId}/bio`, newBio);
+        console.log(response);
         if (response.status === 200) {
             return true;
         } else {

@@ -7,6 +7,7 @@ import CreateProjectPage from "../pages/dashboardPages/projects/createProjects/C
 import CreateEducationQualificationPage from "../pages/dashboardPages/qualifications/createEducationQualification/CreateEducationQualification";
 import CreateWorkExperiencePage from "../pages/dashboardPages/qualifications/createWorkExperience/CreateWorkExperience";
 import CreateSkillPage from "../pages/dashboardPages/skills/createSkill/CreateSkill";
+import SettingsPage from "../pages/dashboardPages/webApis/WebApis";
 
 function SecureRoutes() {
 
@@ -32,6 +33,8 @@ function SecureRoutes() {
         <Route path="qualifications/work/new" element={<CreateWorkExperiencePage />} />
 
         <Route path="skills/new" element={<CreateSkillPage />} />
+
+        <Route path="settings" element={<SettingsPage />} />
 
       </Route>
     </>
