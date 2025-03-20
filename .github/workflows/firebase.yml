@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,8 +20,7 @@ jobs:
         run: |
           echo "REACT_APP_BASE_URL=${{ secrets.REACT_APP_BASE_URL }}" >> $GITHUB_ENV
           echo "REACT_APP_GOOGLE_CLIENT_ID=${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}" >> $GITHUB_ENV
-          echo "REACT_APP_FIREBASE_KEY=${{ secrets.REACT_APP_FIREBASE_KEY }}" >> $GITHUB_ENV
-
+          
       - name: Build
         env:
           CI: false        
