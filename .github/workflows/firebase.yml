@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   build:
     name: Build
@@ -10,17 +11,26 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+
       - name: Install Dependencies
         run: npm install      
+
+      - name: Set Environment Variables
+        run: |
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> $GITHUB_ENV
+          echo "REACT_APP_FIREBASE_KEY=${{ secrets.REACT_APP_FIREBASE_KEY }}" >> $GITHUB_ENV
+
       - name: Build
         env:
           CI: false        
         run: npm run build
+
       - name: Archive Production Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build
           path: build
+
   deploy:
     name: Deploy
     needs: build
@@ -28,11 +38,13 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: build
           path: build
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
