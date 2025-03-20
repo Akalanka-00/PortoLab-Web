@@ -4,7 +4,7 @@ import { GiF1Car } from 'react-icons/gi'
 import './sidebar.scss'
 import sidebarData from '../../data/sidebar.data'
 import { TbLogout } from 'react-icons/tb'
-import { CiCircleQuestion } from 'react-icons/ci'
+import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom'
 const SideBar = () => {
 
@@ -20,7 +20,6 @@ const SideBar = () => {
     const handleMenuClick = (id) => {
         setActiveMenu(id);
         const menu = sidebarData[id];
-        console.log(menu);
         navigate(`/dashboard${menu.link}`);
     }
     return (
@@ -44,8 +43,8 @@ const SideBar = () => {
                 <div className="sidebar-footer">
 
                     <div className="sidebar-item">
-                        <div className="sidebar-icon"><CiCircleQuestion/></div>
-                        <div className="sidebar-title">Help & getting started</div>
+                        <div className="sidebar-icon"><IoSettingsOutline /></div>
+                        <div className="sidebar-title">Settings</div>
                     </div>
 
                     <div className="sidebar-item">

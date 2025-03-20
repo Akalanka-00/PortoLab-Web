@@ -1,0 +1,17 @@
+.highcharts-container {
+    color: var(--textColor) !important;
+    fill: var(--textColor) !important;
+  }
+  
+  .highcharts-title,
+  .highcharts-axis-title,
+  .highcharts-axis-labels {
+    fill: var(--textColor) !important;
+    color: var(--textColor) !important;
+
+    text{
+      fill: var(--textColor) !important;
+      color: var(--textColor) !important;
+    }
+  }
+  

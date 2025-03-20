@@ -1,0 +1,42 @@
+.qualification-container{
+    width: 100%;
+    margin-bottom: 5rem;
+
+    .qualification-table{
+        width: 100%;
+
+        thead{
+            background-color: var(--softBg);
+            color: var(--textColor);
+            font-weight: 600;
+            border-radius: 15px 5px 0 0;
+            
+            th{
+                text-align: left;
+                padding: 5px 10px;
+                background-color: transparent;
+            }
+        }
+
+        tbody{
+            tr{
+                border-bottom: 1px solid var(--softBg);
+                transition: background-color 0.3s;
+                cursor: default;
+
+                &:last-child{
+                    border-bottom: none;
+                    border-radius: 0 0 5px 5px;
+                }
+
+                td{
+                    padding: 10px;
+                    font-size: 1rem;
+                    color: var(--textColor);
+                }
+            }
+        }
+
+        
+    }
+}

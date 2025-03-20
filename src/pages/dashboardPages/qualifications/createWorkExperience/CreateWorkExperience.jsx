@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './createWorkExperience.scss';
 import '../../dashboard.scss';
+import { ExperienceAPI } from '../../../../api/qualification/experience.api';
 
 const CreateWorkExperiencePage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const CreateWorkExperiencePage = () => {
     isStillWorking: false,
     description: '',
   });
+  const experienceApi = new ExperienceAPI();
 
   const handleChange = (e) => {
     const { id, type, value, checked } = e.target;
@@ -44,8 +46,9 @@ const CreateWorkExperiencePage = () => {
     });
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     console.log('Work Experience Data:', formData);
+    await experienceApi.createExperience(formData);
   };
 
   return (

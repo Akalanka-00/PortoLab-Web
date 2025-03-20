@@ -11,6 +11,8 @@
     "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.7",
+    "highcharts": "^12.1.2",
+    "highcharts-react-official": "^3.2.1",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
@@ -19,6 +21,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.10.1",
     "sass": "^1.85.1",
+    "sweetalert2": "^11.17.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

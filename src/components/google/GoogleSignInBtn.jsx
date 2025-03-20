@@ -3,11 +3,11 @@ import "./googleSignInBtn.scss";
 import GoogleIcon from "../../assets/icons/google.png";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-// import { AuthAPI } from "../../api/auth/auth.api";
+import { AuthAPI } from "../../api/auth/auth.api";
 import { useNavigate } from "react-router-dom";
 
 const GoogleSignInBtn = ({text}) => {
-    // const authApi = new AuthAPI();
+    const authApi = new AuthAPI();
     const navigate = useNavigate();
     const login = useGoogleLogin({
         onSuccess: async (tokenResponse) => {
@@ -22,10 +22,10 @@ const GoogleSignInBtn = ({text}) => {
                 });
 
                 console.log("User Info:", data); // Contains email, name, picture, etc.
-                // const res = await authApi.googleSignIn(data);
-                // if(res) {
-                //     navigate('/dashboard');
-                // }
+                const res = await authApi.googleSignIn(data);
+                if(res) {
+                    navigate('/dashboard');
+                }
             } catch (error) {
                 console.error("Error fetching user info:", error);
             }
