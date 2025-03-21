@@ -23,18 +23,18 @@
                 .form-label {
                     font-size: 1rem;
                     font-weight: 600;
-                    color: var(--textColor);
+                    color: var(--color-dark);       
                     min-width: 10rem;
                 }
 
                 .form-input {
                     width: 100%;
                     padding: 0.5rem;
-                    border: 1px solid var(--softBg);
-                    background-color: var(--softBg);
+                    border: 1px solid var(--color-light);
+                    background-color: var(--color-light);
                     border-radius: 5px;
                     font-size: 1rem;
-                    color: var(--textColor);
+                    color: var(--color-dark);       
                 }
 
                 .date-input {
@@ -61,18 +61,18 @@
                     .form-label {
                         font-size: 1rem;
                         font-weight: 600;
-                        color: var(--textColor);
+                        color: var(--color-dark);       
                         min-width: 10rem;
                     }
 
                     .form-input {
                         width: 100%;
                         padding: 0.5rem;
-                        border: 1px solid var(--softBg);
-                        background-color: var(--softBg);
+                        border: 1px solid var(--color-light);
+                        background-color: var(--color-light);
                         border-radius: 5px;
                         font-size: 1rem;
-                        color: var(--textColor);
+                        color: var(--color-dark);       
                     }
 
                 }

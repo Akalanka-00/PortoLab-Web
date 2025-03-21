@@ -6,19 +6,26 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--bg);
-    border-bottom: 1px solid var(--seperatoor);
+    color: var(--color-dark);
+
+    // background-color: var(--bg);
+    // border-bottom: 1px solid var(--seperatoor);
 
 
     .navbar-leading{
         height: 100%;
-        color: var(--softTextColor);
+        // color: var(--softTextColor);
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
         padding: 0 20px;
+
+        .menu-icon{
+            cursor: pointer;
+            
+        }
     }
 
     .navbar-trailing{
@@ -35,11 +42,11 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background-color: var(--bg);
-            border: 1px solid var(--softTextColor);
+            // background-color: var(--bg);
+            // border: 1px solid var(--softTextColor);
             border-radius: 5px;
             padding: 0 10px;
-            color: var(--softTextColor);
+            // color: var(--softTextColor);
 
             input{
                 width: 150px;
@@ -53,7 +60,7 @@
             }
 
             &:focus-within{
-                border: 2px solid var(--softTextColor);
+                // border: 2px solid var(--softTextColor);
             }
 
             button{
@@ -72,13 +79,13 @@
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
-            color: var(--softTextColor);
+            // color: var(--softTextColor);
 
             .option-icon{
                 cursor: pointer;
 
                 &:hover{
-                    color: var(--textColor);
+                    // color: var(--textColor);
                 }
             }
         }

@@ -1,9 +1,13 @@
 .sidebar-container{
     padding: 1rem;
     position: sticky;
-    background-color: var(--bg);
-    border-right: 2px solid var(--seperatoor);
+    background-color: var(--color-white);
+    box-shadow: var(--box-shadow);
 
+    &:hover{
+        box-shadow: none;
+
+    }
     .header{
         display: inline-block;
         flex-direction: column;
@@ -22,11 +26,11 @@
     
         .header-text{
             font-size: 1.5rem;
-            color: var(--softTextColor);
+            color: var(--color-dark);
             margin: 0;
-            padding: 0;
-            margin-top: 2rem;
+            padding: 0 0.5rem;
             font-weight: bold;
+
         }
     }
 
@@ -45,6 +49,7 @@
             flex-direction: column;
             gap: 0.5rem;
             .sidebar-item{
+                color: var(--color-info-dark);
                 display: flex;
                 gap: 1rem;
                 align-items: center;
@@ -55,42 +60,30 @@
                 transition: all 0.3s ease-in-out;
 
                 &:hover{
-                    background-color: var(--primary);
-                    color: var(--textColor);
+                    color: var(--color-primary);
 
-                    .sidebar-icon{
-                        color: var(--bg);
-                    }
 
-                    .sidebar-title{
-                        color: var(--bg);
-                    }
+
                 }
 
                 .sidebar-icon{
                     font-size: 1rem;
-                    color: var(--softTextColor);
+                    // color: var(--softTextColor);
                 }
 
 
 
                 .sidebar-title{
                     font-size: 0.9rem;
-                    color: var(--softTextColor);
+                    // color: var(--softTextColor);
                 }
             }
 
             .sidebar-item.active{
-                background-color: var(--primary);
-                color: var(--textColor);
+                color: var(--color-primary);
+                background-color: var(--color-light);
 
-                .sidebar-icon{
-                    color: var(--bg);
-                }
-
-                .sidebar-title{
-                    color: var(--bg);
-                }
+            
             }
 
             
@@ -110,32 +103,34 @@
                 border-radius: 0.5rem;
                 cursor: pointer;
                 transition: all 0.3s ease-in-out;
+                color: var(--color-info-dark);
+
 
                 &:hover{
-                    background-color: var(--primary);
-                    color: var(--textColor);
+                    color: var(--color-primary);
+
 
                     .sidebar-icon{
-                        color: var(--bg);
+                        // color: var(--bg);
                         font-size: 1rem;
                     }
 
                     .sidebar-title{
-                        color: var(--bg);
+                        // color: var(--bg);
                         font-size: 0.9rem;
                     }
                 }
 
                 .sidebar-icon{
                     font-size: 1rem;
-                    color: var(--softTextColor);
+                    // color: var(--softTextColor);
                 }
 
 
 
                 .sidebar-title{
                     font-size: 0.9rem;
-                    color: var(--softTextColor);
+                    // color: var(--softTextColor);
                 }
             }
 

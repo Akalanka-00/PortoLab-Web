@@ -9,7 +9,7 @@
             .project-form-title {
                 font-size: 1.5rem;
                 font-weight: 600;
-                color: var(--textColor);
+                color: var(--color-dark);       
             }
         }
 
@@ -34,18 +34,18 @@
                 .form-label {
                     font-size: 1rem;
                     font-weight: 600;
-                    color: var(--textColor);
+                    color: var(--color-dark);       
                     min-width: 10rem;
                 }
 
                 .form-input {
                     width: 100%;
                     padding: 0.5rem;
-                    border: 1px solid var(--softBg);
-                    background-color: var(--softBg);
+                    border: 1px solid var(--color-light);
+                    background-color: var(--color-light);
                     border-radius: 5px;
                     font-size: 1rem;
-                    color: var(--textColor);
+                    color: var(--color-dark);       
                 }
 
                 .date-input {
@@ -87,18 +87,18 @@
                     .form-label {
                         font-size: 1rem;
                         font-weight: 600;
-                        color: var(--textColor);
+                        color: var(--color-dark);       
                         min-width: 10rem;
                     }
 
                     .form-input {
                         width: 100%;
                         padding: 0.5rem;
-                        border: 1px solid var(--softBg);
-                        background-color: var(--softBg);
+                        border: 1px solid var(--color-light);
+                        background-color: var(--color-light);
                         border-radius: 5px;
                         font-size: 1rem;
-                        color: var(--textColor);
+                        color: var(--color-dark);       
                     }
 
                 }
@@ -123,7 +123,7 @@
                         gap: 1rem;
                         margin-top: 1rem;
                         padding: 1rem;
-                        background-color: var(--softBg);
+                        background-color: var(--color-background);
                         border-radius: 5px;
                         &.hidden{
                             display: none;
@@ -137,21 +137,21 @@
                             padding: 0.2rem 0.7rem;
                             
                             border-radius: 5px;
-                            color: var(--textColor);
+                            color: var(--color-dark);
                             gap: 1rem;
                             cursor: default;
 
                             .tech-name{
                                 font-size: 0.8rem;
                                 font-weight: 600;
-                                color: var(--textColor);
+                                color: var(--color-dark);
                                 text-wrap: nowrap;
                             }
 
                             .remove-tech-btn{
                                 font-size: 0.8rem;
                                 font-weight: 600;
-                                color: var(--textColor);
+                                color: var(--color-dark);
                                 cursor: pointer;
                             }
                         }
