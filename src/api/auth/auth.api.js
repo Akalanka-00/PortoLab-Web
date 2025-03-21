@@ -24,6 +24,7 @@ export class AuthAPI {
           localStorage.setItem('user', JSON.stringify({id: res.userId, fname: data.Fname, lname: data.Lname, picture:data.Avatar, email:data.Email}));
       return response.data;
     }else {
+      console.log(response);
         Swal.fire({
             icon: "error",
             title: "Authentication Error!",
@@ -34,14 +35,13 @@ export class AuthAPI {
   }
 
   async register(user) {
-    const {name, email, password} = user;
-    const data = {username: name, password:password, email:email, authentication_method: 'email', created_date: new Date()};
+    const {fname, lname, email, password} = user;
+    const data = {Fname: fname, Lname:lname, Password:password, Email:email, AuthenticationType: 'email', CreatedDate: new Date()};
 
-    const response = await this._baseApi.post('/auth/register', data);
+    const response = await this._baseApi.post('/api/auth/register', data);
     if(response.status === 200 && response.data.message ==="Success") {
         const res = response.data;
-        localStorage.setItem('token', JSON.stringify(res));
-        localStorage.setItem('user', JSON.stringify({name, picture:null, email}));
+       
         return response.data;
     }else {
         Swal.fire({
@@ -55,9 +55,9 @@ export class AuthAPI {
 
     async login(user) {
         const {email, password} = user;
-        const data = {password:password, email:email};
+        const data = {Password:password, Email:email, AuthenticationType: 'email',};
     
-        const response = await this._baseApi.post('/auth/login', data);
+        const response = await this._baseApi.post('/api/auth/login', data);
         if(response.status === 200 && response.data.message ==="Success") {
             const res = response.data;
             localStorage.setItem('token', JSON.stringify(res));
