@@ -3,7 +3,7 @@
   --textColor: black;
   --softBg: #f0f0f0;
   --softTextColor: #626262;
-  --primary: #3E8DD4CC;
+  --primary: #007FC2;
   --secondary: #3E8DD4;
   --seperatoor: #f0f0f0;
 }
@@ -30,7 +30,7 @@ a {
   --softBg: #1f273a;
   --softTextColor: #a6a6a6;
   --seperatoor: #091122;
-
+  --primary: #007FC2;
 }
 
 [data-theme="light"] {
@@ -39,6 +39,7 @@ a {
   --softBg: #dde0e6;
   --softTextColor: #626262;
   --seperatoor: #f5f4f4;
+  --primary: #007FC2;
 
 }
 
@@ -62,8 +63,9 @@ a {
   padding: 0.3rem 1rem;
   border-radius: 5px;
   border: none;
-  background: #3E8DD4CC;
-  color: var(--softBg);
+  /* background: #3E8DD4CC; */
+  background-color: #007FC2;
+  color: white;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;

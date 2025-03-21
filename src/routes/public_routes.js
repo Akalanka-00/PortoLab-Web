@@ -11,6 +11,7 @@ function PublicRoutes() {
     return (
         <>
             <Route path="/" element={<HomePage />} />
+            <Route path="/api" element={<ApidocPage />} />
             
             <Route path="/login" element={<AuthorizeLogin><LoginPage /></AuthorizeLogin>} />
             <Route path="/register" element={<AuthorizeLogin><RegisterPage /></AuthorizeLogin>} />
