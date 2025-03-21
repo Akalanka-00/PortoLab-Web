@@ -11,12 +11,13 @@
         flex-direction: column;
         height: 100vh;
         overflow: hidden;
+        background-color: var(--color-background);
+
 
         .outlet {
             flex-grow: 1;
             width: 100%;
             padding: 1rem;
-            background-color: var(--seperatoor);
             overflow-y: auto;
             height: calc(100vh - 50px);
         }

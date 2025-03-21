@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import './navbar.scss'
 import { FaHistory, FaMoon, FaStar } from 'react-icons/fa'
-import { RiSideBarFill } from 'react-icons/ri'
+import { GiHamburgerMenu } from "react-icons/gi";
 import { CiSearch } from 'react-icons/ci'
 import { IoSunnySharp } from 'react-icons/io5'
 import { HiMiniBell } from 'react-icons/hi2'
@@ -54,8 +54,8 @@ const Navbar = () => {
   return (
     <div className='navbar-container'>
       <div className="navbar-leading">
-        <RiSideBarFill />
-        <FaStar />
+      <GiHamburgerMenu className='menu-icon'/>
+
       </div>
       <div className="navbar-trailing">
         {/* <div className="search-box">

@@ -14,8 +14,9 @@
     .header-title{
         font-size: 2rem;
         font-weight: 600;
-        color: var(--textColor);
-    }
+        color: var(--color-dark);   
+        text-transform: uppercase;    
+      }
 
     .portolab-btn{
         width: fit-content;
@@ -30,7 +31,7 @@
     width: 100%;
     font-size: 1rem;
     padding: 5rem;
-    color: var(--softTextColor);
+    color: var(--color-dark);       
   }
 
   /* Add this to your CSS or SCSS file */

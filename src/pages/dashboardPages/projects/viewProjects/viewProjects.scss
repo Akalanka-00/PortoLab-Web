@@ -8,11 +8,15 @@
         align-items: flex-start;
         gap: 0.5rem;
         padding: 1rem;
+        padding-bottom: 2rem;
         cursor: pointer;
-        border-radius: 5px;
+        border-radius: 10px;
+        background-color: var(--color-white);
+        box-shadow: var(--box-shadow);
 
         &:hover{
-            background-color: var(--primary);
+            // background-color: var(--color-background);
+            box-shadow: none;
         }
 
         
@@ -24,8 +28,9 @@
             .project-view-card-title{
                 font-size: 1.5rem;
                 font-weight: 600;
-                color: var(--textColor);
-                
+                color: var(--color-dark);       
+                text-transform: uppercase;    
+
             }
             
         }
@@ -53,7 +58,7 @@
 
                 .project-view-card-description{
                     font-size: 1rem;
-                    color: var(--softTextColor);
+                    color: var(--color-dark-variant);
                     text-align: justify;
                 }
     
@@ -64,10 +69,10 @@
     
                     .project-view-card-technology{
                         font-size: 1rem;
-                        color: var(--softTextColor);
+                        color: var(--color-primary);
+                        background-color: var(--color-background);
                         padding: 5px 10px;
                         border-radius: 5px;
-                        background-color: var(--softBg);
                     }
                 }
             }

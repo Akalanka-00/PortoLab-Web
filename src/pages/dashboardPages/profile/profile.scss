@@ -9,8 +9,8 @@
         width: 100%;
         padding: 1rem;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        background-color: var(--bg);
+        box-shadow: var(--box-shadow);
+        background-color: var(--color-white);
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -49,7 +49,7 @@
             .info-title{
                 font-size: 1rem;
                 font-weight: 600;
-                color: var(--textColor);
+                color: var(--color-dark);       
                 min-width: 80px;
                 text-align: start;
 
@@ -59,7 +59,7 @@
                 width: 100%;
                 font-size: 1rem;
                 font-weight: 400;
-                color: var(--softTextColor);
+                color: var(--color-dark-variant);       
                 text-align: start;
                 text-overflow: ellipsis;
             }
@@ -68,13 +68,15 @@
                 width: 100%;
                 font-size: 1rem;
                 font-weight: 400;
-                color: var(--softTextColor);
+                color: var(--color-dark);       
                 text-align: start;
                 border: none;
                 outline: none;
-                background-color: var(--softBg);
+                background-color: var(--color-background);
                 text-overflow: ellipsis;
                 padding: 0.5rem;
+                padding-left: 1rem;
+                border-radius: 5px;
             }
 
         }
@@ -94,13 +96,13 @@
             gap: 1rem;
             padding: 1rem;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: var(--bg);
+            box-shadow: var(--box-shadow);
+            background-color: var(--color-white);
 
             .cv-upload-title{
                 font-size: 1rem;
                 font-weight: 600;
-                color: var(--textColor);
+                color: var(--color-dark);       
             }
 
             .cv-actions{
@@ -122,13 +124,13 @@
             gap: 1rem;
             padding: 1rem;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            background-color: var(--bg);
+            box-shadow: var(--box-shadow);
+            background-color: var(--color-white);
 
             .bio-title{
                 font-size: 1rem;
                 font-weight: 600;
-                color: var(--textColor);
+                color: var(--color-dark);       
             }
 
             .bio-textarea{
@@ -136,8 +138,8 @@
                 height: 200px;
                 font-size: 1rem;
                 font-weight: 400;
-                color: var(--softTextColor);
-                background-color: var(--softBg);
+                color: var(--color-dark);       
+                background-color: var(--color-background);
                 padding: 1rem;
                 border-radius: 10px;
                 border: none;

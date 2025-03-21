@@ -3,12 +3,12 @@ import "../authentication.scss"
 import { GiF1Car } from "react-icons/gi";
 import Banner from "../../../assets/images/register_banner.jpg";
 import GoogleSignInBtn from '../../../components/google/GoogleSignInBtn';
-// import { AuthAPI } from '../../../api/auth/auth.api';
 import { useNavigate } from 'react-router-dom';
+import { AuthAPI } from '../../../api/auth/auth.api';
 
 const LoginPage = () => {
 
-    //   const authApi = new AuthAPI();
+      const authApi = new AuthAPI();
       const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
@@ -24,12 +24,13 @@ const LoginPage = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    //   const response = await authApi.login(formValues);
-    //   if(response){
-    //     navigate('/dashboard');
-    //   }else{
-    //     setFormValues({email: "", password: ""});
-    //   }
+      const response = await authApi.login(formValues);
+      if(response){
+        console.log(response);
+        navigate('/dashboard');
+      }else{
+        setFormValues({email: "", password: ""});
+      }
       
     
   }
@@ -38,7 +39,7 @@ const LoginPage = () => {
     <div className='container auth-container'>
       <div className="left-container">
         <div className="header">
-          <GiF1Car className="header-icon" />
+          {/* <GiF1Car className="header-icon" /> */}
           <div className='header-text'>AutoShop</div>
         </div>
 
@@ -50,12 +51,12 @@ const LoginPage = () => {
         <div className="form-group register-form">
 
             <div className="portolab-input-group">
-            <input type="text" className='input-field' id="email" name='email' onChange={handleChange}  required/>
+            <input type="text" className='input-field' id="email" name='email' onChange={handleChange} value={formValues.email}  required/>
             <label className='input-label' htmlFor='email'>Your email address<span>*</span></label>
             </div>
 
             <div className="portolab-input-group">
-            <input type="password" className='input-field' id="password" name='password' onChange={handleChange}  required/>
+            <input type="password" className='input-field' id="password" name='password' onChange={handleChange} value={formValues.password} required/>
             <label className='input-label' htmlFor='password'>Create Password<span>*</span></label>
             </div>
 
