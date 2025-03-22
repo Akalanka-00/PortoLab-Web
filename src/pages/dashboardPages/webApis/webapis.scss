@@ -1,51 +1,119 @@
 .dashboard-webapi-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%; 
-    margin-top: 2rem;
-  
-    .api-stats-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 20px;
-      width: 100%; 
-    }
-  
-    .api-stat-item {
-      background: var(--color-background); /* Use your theme variable */
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: var(--box-shadow);
-    }
-  
-    .api-stat-chart {
-      width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2rem;
+
+  .api-stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+
+  .api-stat-item {
+    background: var(--color-background);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .api-stat-chart {
+    width: 100%;
+  }
+
+  .api-configuration-header-title {
+    font-size: 1.4rem;
+    color: var(--color-dark);
+    font-weight: 600;
+  }
+
+  .token-table-container {
+    margin-top: 20px;
+    background: var(--color-light);    
+    color: var(--color-dark);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: var(--box-shadow);
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+  }
+
+  .token-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
     }
 
-    .api-configuration-header-title{
-        font-size: 1.2rem;
-        color: var(--color-dark);
-        font-weight: 600;
+    th {
+      font-weight: bold;
+    }
+
+    td {
+      white-space: nowrap; /* Prevent text wrapping */
+      text-decoration: none;
+    }
+
+    .token-cell {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 2rem;
+
+      .copy-icon{
+        cursor: pointer;
+        color: var(--color-primary);
+        font-size: 1rem;
+      }
+    }
+
+    .status-active {
+      color: var(--color-success);
+      font-weight: bold;
+    }
+
+    .status-expired {
+      color: var(--color-danger);
+      font-weight: bold;
     }
   }
-  
-  // Responsive Design: Adjust for smaller screens
-  @media (max-width: 1200px) {
-    .api-stats-container {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
-    }
+
+  .loading-message, .error-message, .empty-message {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+    color: gray;
   }
-  
-  @media (max-width: 768px) {
-    .api-stats-container {
-      grid-template-columns: repeat(1, 1fr); /* 1 column on small screens */
-    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .api-stats-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  @media (max-width: 600px) {
-    .api-stat-chart {
-      max-height: 250px; /* Smaller max height on very small screens */
-    }
+}
+
+@media (max-width: 768px) {
+  .api-stats-container {
+    grid-template-columns: repeat(1, 1fr);
   }
-  
+
+  .token-table {
+    font-size: 12px; /* Reduce font size for smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .api-stat-chart {
+    max-height: 250px;
+  }
+
+  .token-table th, .token-table td {
+    padding: 8px;
+  }
+}

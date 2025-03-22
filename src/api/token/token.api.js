@@ -17,4 +17,13 @@ export class TokenAPI {
             return null;
         }
     }
+
+    async getTokens() {
+        const response = await this._baseApi.get(`api/token`);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            return null;
+        }
+    }
 }

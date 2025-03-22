@@ -28,7 +28,9 @@ function SecureRoutes() {
         ))}
 
         <Route path="projects/new" element={<CreateProjectPage />} />
-        
+        <Route path="projects/edit/:id" element={<CreateProjectPage />} />
+        <Route path="projects/view/:id" element={<CreateProjectPage />} />
+
         <Route path="qualifications/education/new" element={<CreateEducationQualificationPage />} />
         <Route path="qualifications/work/new" element={<CreateWorkExperiencePage />} />
 
