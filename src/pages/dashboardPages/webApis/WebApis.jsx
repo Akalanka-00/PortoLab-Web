@@ -63,8 +63,8 @@ const WebApisPage = () => {
               <table className="token-table">
                 <thead>
                   <tr>
+                    <th>Portfolio URL</th>
                     <th>Token</th>
-                    <th>Origin</th>
                     <th>Status</th>
                     <th>Created Date</th>
                     <th>Expired Date</th>
