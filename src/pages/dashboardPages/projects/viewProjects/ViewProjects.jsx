@@ -26,6 +26,30 @@ const ViewProjectsPage = () => {
     }
   };
 
+  const handleProjectStatusChange = async (id, status) => {
+    status = status === "active" ? "private" : "active";
+    try {
+      const response = await projectAPI.updateProjectStatus(id, status);
+      if (response) {
+        setOptionIndex(-1);
+        Swal.fire({
+          title: "Success!",
+          text: "Project status updated successfully.",
+          icon: "success"
+        });
+        const updatedProjects = projects.map(project => {
+          if (project.id === id) {
+            return { ...project, status };
+          }
+          return project;
+        });
+        setProjects(updatedProjects);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleDeleteProject = async (projectId) => {
     setIsDeleteInProgress(true);
     Swal.fire({
@@ -117,7 +141,7 @@ const ViewProjectsPage = () => {
           projects.map((project, idx) => (
             <div className="project-view-card" key={idx} onClick={() => navigate(`/dashboard/projects/view/${project.id}`)}>
               <div className="project-view-card-header">
-              <div className="project-view-card-title">{project.title}</div>
+              <div className="project-view-card-title">{project.title} <span className={`project-${project.status}`}>{project.status}</span></div>
 
                 <div className="project-options">
                   <SlOptionsVertical  onClick={(e) => handleOptionClick(e, idx)}/>
@@ -125,6 +149,7 @@ const ViewProjectsPage = () => {
                     <div className="project-options-dropdown">
                       <div className="project-option" onClick={() => navigate(`/dashboard/projects/edit/${project.id}`)}>Edit</div>
                       <div className="project-option" onClick={(e)=> {e.stopPropagation(); handleDeleteProject(project.id)}}>Delete</div>
+                      <div className="project-option" onClick={(e)=>{e.stopPropagation();handleProjectStatusChange(project.id, project.status)}}>{project.status=="active"? "Make it private":"Make it public"}</div>
                     </div>
                   )}
                 </div>

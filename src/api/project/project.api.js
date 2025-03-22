@@ -112,4 +112,20 @@ export class ProjectAPI {
               return null;
         }
     }
+
+    async updateProjectStatus(id, status) {
+
+        const response = await this._baseApi.update(`api/project/${id}/status/${status}`);
+        console.log(response);
+        if(response.status === 200) {
+            return response.data;
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "Error ocured!",
+                text: response.data.message,
+              });
+              return null;
+        }
+    }
 }
