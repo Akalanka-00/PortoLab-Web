@@ -44,6 +44,25 @@
                 color: var(--color-dark);       
                 text-transform: uppercase;    
 
+                span{
+                    font-size: 0.8rem;
+                    font-weight: 400;
+                    color: var(--color-dark-variant);
+                    text-transform: none;
+                    padding: 0.2rem 0.5rem;
+                    border-radius: 10px;
+                    font-weight: 500;
+                    color: white;
+                }
+
+                .project-active{
+                    background-color: var(--color-success);
+                }
+
+                .project-private{
+                    background-color: var(--color-danger);
+                }
+
             }
            
             .project-options{
@@ -64,7 +83,7 @@
                     flex-direction: column;
                     gap: 1rem;
 
-                    .project-options-dropdown-item{
+                    .project-option{
                         font-size: 1rem;
                         color: var(--color-dark);
                         cursor: pointer;
