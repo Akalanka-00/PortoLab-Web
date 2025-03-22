@@ -17,18 +17,16 @@ const processDataForChart = (range, rawData) => {
   if (range === 'yesterday') {
     chartData = new Array(24).fill(0); 
     rawData.forEach(record => {
-      const calledAt = new Date(record.CalledAt); 
+      const calledAt = new Date(record.calledAt);  
       const hour = calledAt.getUTCHours();  
       chartData[hour] += 1;
     });
   } else if (range === 'last_week') {
     chartData = new Array(7).fill(0); 
 
-    rawData.forEach(record => {
-      const calledAt = new Date(record.CalledAt);  
-      console.log("record.CalledAt:", record.calledAt);
+    rawData.forEach((record, index) => {
+      const calledAt = new Date(record.calledAt);  
 
-      console.log("calledAt", calledAt);  // Check if this prints the correct date
       const dayOfWeek = calledAt.getUTCDay();  
       chartData[dayOfWeek] += 1;
     });
@@ -36,14 +34,12 @@ const processDataForChart = (range, rawData) => {
     chartData = new Array(31).fill(0); // 31 days
 
     rawData.forEach(record => {
-      const calledAt = new Date(record.CalledAt);  // Ensure this is parsed correctly
+      const calledAt = new Date(record.calledAt);  
       const dayOfMonth = calledAt.getUTCDate();  // Using getUTCDate() to get the day of the month (1-31)
-      console.log("dayOfMonth", dayOfMonth);  // Check if this prints the correct day number
       chartData[dayOfMonth - 1] += 1;
     });
   }
 
-  console.log("chartData", chartData);  // Log the resulting chartData to check the array
   return chartData;
 };
 
@@ -53,7 +49,6 @@ const processDataForChart = (range, rawData) => {
     try {
       const fetchedData = await apiCallAPI.getByTimeRange(range);
       if (fetchedData) {
-        console.log("fetchedData", fetchedData);
         const chartData = processDataForChart(range, fetchedData);
         if (range === 'yesterday') {
           setYesterdayData(chartData);
@@ -62,8 +57,6 @@ const processDataForChart = (range, rawData) => {
         } else if (range === 'last_month') {
           setLastMonthData(chartData);
         }
-        console.log("range", range);
-        console.log(chartData);
       } else {
         setError('Failed to fetch data');
       }
