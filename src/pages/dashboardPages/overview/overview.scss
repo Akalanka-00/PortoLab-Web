@@ -36,6 +36,9 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        min-height: 6rem;
+        color: var(--color-dark);
+
 
         .no-data-top-card{
           width: 100%;

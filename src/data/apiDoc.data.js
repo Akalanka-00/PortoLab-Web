@@ -1,6 +1,7 @@
 const apiDocData = [
     {
         title: "Get all projects",
+        name: "projects-api",
         description: "The Get Projects API allows you to retrieve a comprehensive list of all public projects available in the system. This API provides detailed information about each project, including the project title, description, technologies used, GitHub repository, live project URL, and more. With this API, users can explore a variety of projects, whether they are ongoing or completed, and view the associated details like the project's start and end dates and the technologies implemented. It's a great way to showcase projects publicly and easily integrate them into any web application or platform.",
         method: "GET",
         endpoint: "/api/public/projects",
@@ -36,6 +37,7 @@ const apiDocData = [
 
     {
         title: "Get user info",
+        name: "user-api",
         description: "Fetches public user information based on the provided API Token. The response includes user details such as name, profile picture, bio",
         method: "GET",
         endpoint: "/api/public/user",
@@ -61,7 +63,8 @@ const apiDocData = [
     },
 
     {
-        title: "Portfolio visit",
+        title: "Portfolio visits",
+        name: "portfolio-visit-api",
         description: "Tracks visits to a portfolio. The deviceId can be used to identify individual devices, which can be generated on the frontend. If no deviceId is provided, an empty string can be passed.",
         method: "POST",
         endpoint: "/api/public/visits/{deviceId}",
@@ -84,6 +87,10 @@ const apiDocData = [
           body: {} // No content response
         }
       },
+
+
+
+
     // {
     //     title: "Update project details",
     //     description: "Updates the details of a specific project. The project ID must be provided in the URL path.",

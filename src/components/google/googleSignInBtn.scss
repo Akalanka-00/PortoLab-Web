@@ -10,7 +10,7 @@
         gap: 1rem;
         cursor: pointer;
         padding: 0.5rem;
-        border: 1px solid var(--softTextColor);
+        border: 1px solid #363949;
         transition: all 0.3s ease-in-out;
     
         img{
@@ -20,6 +20,6 @@
     }
     
     .google-auth:hover{
-        border: 1px solid var(--textColor);
+        border: 1px solid #363949;
     }
 }

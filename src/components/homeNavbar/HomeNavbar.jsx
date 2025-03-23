@@ -11,7 +11,7 @@ const HomeNavbar = () => {
       <div className="home-navbar-items">
         <div className="home-navbar-item" onClick={()=> navigate("/")}>Home</div>
         <div className="home-navbar-item">About Us</div>
-        <div className="home-navbar-item" onClick={()=> navigate("/api")}>Documentation</div>
+        <div className="home-navbar-item" onClick={()=> navigate("/documentation")}>Documentation</div>
         <div className="home-navbar-item">Contact Us</div>
       </div>
       <div className="home-navbar-login">

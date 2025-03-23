@@ -60,9 +60,10 @@ export class AuthAPI {
         const response = await this._baseApi.post('/api/auth/login', data);
         if(response.status === 200 && response.data.message ==="Success") {
             const res = response.data;
-            localStorage.setItem('token', JSON.stringify(res));
-            localStorage.setItem('user', JSON.stringify({name:res.username, picture:null, email}));
-            
+            localStorage.setItem('token', res.token);
+            // localStorage.setItem('user', JSON.stringify({name:res.username, picture:null, email}));
+            localStorage.setItem('user', JSON.stringify({id: res.userId, fname: data.Fname, lname: data.Lname, picture:null, email:data.Email}));
+
             return response.data;
         }else {
             Swal.fire({

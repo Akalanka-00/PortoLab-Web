@@ -4,6 +4,7 @@ import { ApiCallAPI } from '../../../api/overview/apicall.api';
 import SparklineChart from '../../../components/charts/sparkLineChart/SparklineChart';
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 import BarChart from '../../../components/charts/barChart/BarChart';
+import apiDocData from '../../../data/apiDoc.data';
 
 const OverviewPage = () => {
   const [yesterdayPortfolioVisits, setYesterdayPortfolioVisits] = useState([]);
@@ -181,11 +182,12 @@ const OverviewPage = () => {
 
   useEffect(() => {
     if (yesterdayRawData.length > 0) {
-      const categories = [...new Set(yesterdayRawData.map(item => item.apiName))];
-      const data = categories.map(apiName => 
+      const apiNames = [...new Set(yesterdayRawData.map(item => item.apiName))];
+      const data = apiNames.map(apiName => 
         yesterdayRawData.filter(item => item.apiName === apiName).length
       );
-  
+      const categories = apiNames.map(apiName => apiName = apiDocData.find(item => item.name === apiName).title);
+
       
       setSummary({ categories, data }); // Properly updating state
     }
@@ -211,10 +213,11 @@ const OverviewPage = () => {
     }
   
     if (apiCallData.length > 0) {
-      const categories = [...new Set(apiCallData.map(item => item.apiName))];
-      const data = categories.map(apiName => 
+      const apiNames = [...new Set(apiCallData.map(item => item.apiName))];
+      const data = apiNames.map(apiName => 
         apiCallData.filter(item => item.apiName === apiName).length
       );
+      const categories = apiNames.map(apiName => apiName = apiDocData.find(item => item.name === apiName).title);
   
   
       setSummary({ categories, data });
@@ -278,7 +281,6 @@ const OverviewPage = () => {
         <div className="summary-views">
             <div className="header">
               <div className="header-name">
-              <div className="sized-box"></div>
               <div className="chart-title">Total API calls</div>
               </div>
               <select name='time-duratin' id='time-duratin' className="header-filter" onChange={totalApiCallsTimeRangeHandler} value={totalApiCallsTimeRange}>
