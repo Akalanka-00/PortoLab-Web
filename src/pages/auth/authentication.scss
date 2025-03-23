@@ -113,7 +113,7 @@ form.sign-in-form {
 // }
 
 .auth-container .input-field input:-webkit-autofill::first-line {
-  color: #000 !important;
+  color: var(--color-dark) !important;
 }
 
 .auth-container .input-field input:-webkit-autofill,
@@ -131,8 +131,8 @@ form.sign-in-form {
 .social-media {
   display: flex;
   justify-content: center;
-  width: 60%;
-}
+  max-width: 380px;
+  width: 100%;}
 
 .social-icon {
   height: 46px;

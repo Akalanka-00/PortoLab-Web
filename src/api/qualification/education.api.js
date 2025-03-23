@@ -35,9 +35,7 @@ export class EducationAPI {
     }
 
         async getEducationExps() {
-            const user = localStorage.getItem('user');
-            const userId = JSON.parse(user).id;
-            const response = await this._baseApi.get(`api/qualification/education/user/${userId}`);
+            const response = await this._baseApi.get(`api/qualification/education/`);
             if(response.status === 200) {
                 return response.data;
             }
@@ -48,6 +46,48 @@ export class EducationAPI {
                     text: response.data.message,
                   });
                   return null;
+            }
+        }
+
+        async getEducationById(id) {
+            const response = await this._baseApi.get(`api/qualification/education/${id}`);
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                Swal.fire({ icon: "error", title: "Error occurred!", text: response.data.message });
+                return null;
+            }
+        }
+
+        async updateEducation(id, education) {
+            const data = {
+                CollegeName: education.college,
+                CourseName: education.course,
+                Result: education.result,
+                StartYear: education.startYear,
+                EndYear: education.endYear,
+                StartMonth: education.startMonth,
+                EndMonth: education.endMonth,
+                Status: education.status,
+            };
+
+            console.log(data);
+            const response = await this._baseApi.update(`api/qualification/education/${id}`, data);
+            if (response.status === 200) {
+                return response.data;
+            } else {
+                Swal.fire({ icon: "error", title: "Error occurred!", text: response.data.message });
+                return null;
+            }
+        }
+    
+        async deleteEducation(id) {
+            const response = await this._baseApi.delete(`api/qualification/education/${id}`);
+            if (response.status === 200) {
+                return true;
+            } else {
+                Swal.fire({ icon: "error", title: "Error occurred!", text: response.data.message });
+                return false;
             }
         }
 }

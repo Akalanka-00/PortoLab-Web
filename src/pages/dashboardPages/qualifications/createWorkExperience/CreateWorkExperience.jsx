@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './createWorkExperience.scss';
 import '../../dashboard.scss';
 import { ExperienceAPI } from '../../../../api/qualification/experience.api';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const CreateWorkExperiencePage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     company: '',
     role: '',
@@ -14,7 +17,14 @@ const CreateWorkExperiencePage = () => {
     isStillWorking: false,
     description: '',
   });
-  const experienceApi = new ExperienceAPI();
+  const [experience, setExperience] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { id } = useParams(); // Get ID from URL if available
+  const location = useLocation();
+  const isEditMode = location.pathname.includes('/edit/');
+  const isViewMode = location.pathname.includes('/view/');
+
+  const workExperienceApi = new ExperienceAPI();
 
   const handleChange = (e) => {
     const { id, type, value, checked } = e.target;
@@ -48,8 +58,62 @@ const CreateWorkExperiencePage = () => {
 
   const handleCreate = async () => {
     console.log('Work Experience Data:', formData);
-    await experienceApi.createExperience(formData);
+    if(isEditMode){
+      const response = await workExperienceApi.updateExperience(id, formData);
+      if (response) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Work Experience updated successfully!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate('/dashboard/qualifications');
+      }
+    }
+    else if(isViewMode){
+      navigate(`/dashboard/qualifications/work/edit/${id}`);
+
+    }
+    else{
+      const response = await workExperienceApi.createExperience(formData);
+    if(response){
+      Swal.fire({
+        icon: 'success',
+        position: 'top-end',
+        title: 'Work Experience created successfully!',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      navigate('/dashboard/qualifications');
+    }
+    }
   };
+
+  const fetchExperience = async () => {
+    const response = await workExperienceApi.getExperienceById(id);
+    if (response) {
+      setExperience(response);
+      console.log('Experience:', response);
+      setFormData({
+        company: response.company,
+        role: response.role,
+        startYear: response.startYear,
+        startMonth: response.startMonth,
+        endYear: response.endYear,
+        endMonth: response.endMonth,
+        isStillWorking: response.stillWorking,
+        description: response.description,
+        status: response.status,
+      });
+
+    }
+  };
+
+    useEffect(() => {
+      if (isEditMode || isViewMode) {
+        fetchExperience();
+      }
+    }, [id]);
 
   return (
     <div className="dashboard-content-container">
@@ -69,6 +133,7 @@ const CreateWorkExperiencePage = () => {
                 id="company"
                 value={formData.company}
                 onChange={handleChange}
+                disabled={isViewMode}
                 placeholder="Company Name"
               />
             </div>
@@ -83,6 +148,7 @@ const CreateWorkExperiencePage = () => {
                 id="role"
                 value={formData.role}
                 onChange={handleChange}
+                disabled={isViewMode}
                 placeholder="Role"
               />
             </div>
@@ -97,6 +163,8 @@ const CreateWorkExperiencePage = () => {
                   className="form-input date-input"
                   value={formData.startYear}
                   onChange={handleChange}
+                  disabled={isViewMode}
+
                 >
                   {Array.from({ length: 11 }, (_, i) => {
                     const year = new Date().getFullYear() - i;
@@ -118,6 +186,8 @@ const CreateWorkExperiencePage = () => {
                   className="form-input date-input"
                   value={formData.startMonth}
                   onChange={handleChange}
+                  disabled={isViewMode}
+
                 >
                   {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(
                     (month, index) => (
@@ -140,7 +210,7 @@ const CreateWorkExperiencePage = () => {
                   className="form-input date-input"
                   value={formData.endYear}
                   onChange={handleChange}
-                  disabled={formData.isStillWorking}
+                  disabled={formData.isStillWorking || isViewMode}
                 >
                   {Array.from({ length: 11 }, (_, i) => {
                     const year = new Date().getFullYear() - i;
@@ -162,7 +232,7 @@ const CreateWorkExperiencePage = () => {
                   className="form-input date-input"
                   value={formData.endMonth}
                   onChange={handleChange}
-                  disabled={formData.isStillWorking}
+                  disabled={formData.isStillWorking || isViewMode}
                 >
                   {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(
                     (month, index) => (
@@ -181,6 +251,8 @@ const CreateWorkExperiencePage = () => {
                 id="isStillWorking"
                 checked={formData.isStillWorking} // Use checked instead of value
                 onChange={handleChange}
+                disabled={isViewMode}
+
               />
               <label htmlFor="isStillWorking" className="form-label">
                 I am still working here
@@ -198,16 +270,17 @@ const CreateWorkExperiencePage = () => {
                 value={formData.description}
                 onChange={handleChange}
                 placeholder="Work Description..."
+                disabled={isViewMode}
+
               />
             </div>
 
             <div className="submit-form-group">
-              <button className="portolab-btn-secondary submit-btn" onClick={resetForm}>
-                Reset
-              </button>
+            {(!isEditMode && !isViewMode) ? <button className="portolab-btn-secondary submit-btn" onClick={() => resetForm()} disabled={isSubmitting}>Reset</button> : <div></div>}
+
 
               <button className="portolab-btn submit-btn" onClick={handleCreate}>
-                Create
+              {isEditMode ? "Update" : isViewMode ? "Edit" : "Create"}
               </button>
             </div>
           </div>

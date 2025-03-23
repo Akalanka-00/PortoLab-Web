@@ -273,8 +273,7 @@ const CreateProjectPage = () => {
                         </div>
 
                         <div className="submit-form-group">
-                            {(!isEditMode && !isViewMode) ? <button className="portolab-btn-secondary submit-btn" onClick={() => resetForm()}>Reset</button> : <div></div>
-                        }                            
+                            {(!isEditMode && !isViewMode) ? <button className="portolab-btn-secondary submit-btn" onClick={() => resetForm()}>Reset</button> : <div></div> }                            
                             <button className="portolab-btn submit-btn" onClick={handleCreate} disabled={isPublishing}>{isEditMode? "Update": isViewMode? "Edit": "Create"}</button>
                         </div>
                     </div>
