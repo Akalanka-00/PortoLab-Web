@@ -6,6 +6,7 @@ import sidebarData from '../../data/sidebar.data'
 import { TbLogout } from 'react-icons/tb'
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 const SideBar = () => {
 
     const [activeMenu, setActiveMenu] = useState(-1);
@@ -22,6 +23,26 @@ const SideBar = () => {
         const menu = sidebarData[id];
         navigate(`/dashboard${menu.link}`);
     }
+
+    const handleLogout = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will be logged out!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Logout!',
+            cancelButtonText: 'No, Cancel!',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                navigate('/login');
+            }
+        });
+    }
+    
     return (
         <div className='sidebar-container'>
             <div className="header">
@@ -49,7 +70,7 @@ const SideBar = () => {
 
                     <div className="sidebar-item">
                         <div className="sidebar-icon"><TbLogout/></div>
-                        <div className="sidebar-title">Logout</div>
+                        <div className="sidebar-title" onClick={handleLogout}>Logout</div>
                     </div>
 
 

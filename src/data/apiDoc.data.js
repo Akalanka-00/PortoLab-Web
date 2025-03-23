@@ -60,6 +60,30 @@ const apiDocData = [
         }
     },
 
+    {
+        title: "Portfolio visit",
+        description: "Tracks visits to a portfolio. The deviceId can be used to identify individual devices, which can be generated on the frontend. If no deviceId is provided, an empty string can be passed.",
+        method: "POST",
+        endpoint: "/api/public/visits/{deviceId}",
+        headers: {
+          "Authorization": "Bearer YOUR_API_TOKEN"
+        },
+        parameters: {
+          path: [
+            {
+              name: "deviceId",
+              type: "string",
+              description: "A unique identifier for the device visiting the portfolio. This is used to track visits from different devices. If no device ID is available, an empty string can be used.",
+              required: true,
+              example: "1234567890abcdef"
+            }
+          ]
+        },
+        response: {
+          status: 200,
+          body: {} // No content response
+        }
+      },
     // {
     //     title: "Update project details",
     //     description: "Updates the details of a specific project. The project ID must be provided in the URL path.",
