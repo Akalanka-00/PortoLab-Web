@@ -22,6 +22,7 @@ const SparklineChart = ({ data }) => {
       gridLineWidth: 0,
       title: { text: null },
     },
+    
     series: [
       {
         data: data, // Accepting data as props

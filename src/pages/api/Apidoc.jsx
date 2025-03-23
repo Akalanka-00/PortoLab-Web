@@ -98,7 +98,7 @@ const ApidocPage = () => {
                             <span className="api-endpoint-params">
                               {api.parameters.path.map((param, idx) => (
                                 <span key={idx} className="api-endpoint-param">
-                                  <strong>{param.name}</strong>
+                                  {/* <strong>{`{${param.name}}`}</strong> */}
                                 </span>
                               ))}
                             </span>
@@ -143,6 +143,9 @@ const ApidocPage = () => {
                     {api.response && (
                       <div className="api-section">
                         <div className="api-section-title">Example Response</div>
+                        <div className="api-response-status">
+                          <strong>Status Code:</strong> {api.response.status}
+                        </div>
                         <pre className="api-code-block">
                           {JSON.stringify(api.response.body, null, 2)}
                         </pre>
