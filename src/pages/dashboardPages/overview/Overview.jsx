@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import './overview.scss';
 import { ApiCallAPI } from '../../../api/overview/apicall.api';
 import SparklineChart from '../../../components/charts/sparkLineChart/SparklineChart';
@@ -9,8 +9,10 @@ import { IoSchoolOutline  } from "react-icons/io5";
 import { MdOutlineBusinessCenter  } from "react-icons/md";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { VscDebugDisconnect } from "react-icons/vsc";
+import { useNavigate } from 'react-router-dom';
 
 const OverviewPage = () => {
+  const navigate = useNavigate();
   const [yesterdayPortfolioVisits, setYesterdayPortfolioVisits] = useState([]);
   const [lastMonthPortfolioVisits, setLastMonthPortfolioVisits] = useState([]);
   const [yesterdayApiCalls, setYesterdayApiCalls] = useState([]);
@@ -170,7 +172,7 @@ const OverviewPage = () => {
   useEffect(() => {
     setTopCardData([
       {
-        title: 'Today Portfolio Visits',
+        title: 'Last 24h Portfolio Visits',
         value: yesterdayPortfolioVisits.length > 0 ? yesterdayPortfolioVisits[yesterdayPortfolioVisits.length - 1] : 0,
         total: yesterdayPortfolioVisits.reduce((a, b) => a + b, 0),
         data: yesterdayPortfolioVisits,
@@ -194,7 +196,7 @@ const OverviewPage = () => {
 
       },
       {
-        title: 'Today Total API Calls',
+        title: 'Last 24h Total API Calls',
         value: yesterdayApiCalls.length > 0 ? yesterdayApiCalls[yesterdayApiCalls.length - 1] : 0,
         total: yesterdayApiCalls.reduce((a, b) => a + b, 0),
         data: yesterdayApiCalls,
@@ -337,7 +339,7 @@ const OverviewPage = () => {
 
             {shortcutData.map((data, index) => {
               return (
-                <div key={index} className="shortcut">
+                <div key={index} className="shortcut" onClick={()=>navigate(data.url)}>
                   <div className="shortcut-icon">
                     {data.icon}
                   </div>

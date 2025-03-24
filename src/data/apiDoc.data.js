@@ -169,7 +169,69 @@ const apiDocData = [
         }
     },
 
+    {
+        title: "Create a testimonial",
+        name: "testimonial-create-api",
+        description: "Allows users to add a new testimonial to the system. This includes their name, email, review, profile image (as a URL or base64 string), and LinkedIn profile URL.",
+        method: "POST",
+        endpoint: "/api/private/testimonials",
+        headers: {
+            "Authorization": "Bearer YOUR_API_TOKEN",
+            "Content-Type": "application/json"
+        },
+        parameters: {
+            path: []
+        },
+        requestBody: {
+            description: "Testimonial data to create.",
+            required: true,
+            body: {
+                "name": "John Doe",
+                "email": "johndoe@gmail.com",
+                "review": "John Doe is a great person to work with. Highly recommended!",
+                "profile": "https://example.com/profile.jpg",
+                "linkedIn": "https://www.linkedin.com/in/johndoe/"
+            }
+        },
+        response: {
+            status: 201,
+            body: {
+                "id": "1234567890abcdef",
+                "name": "John Doe",
+                "email": "johndoe@gmail.com",
+                "review": "John Doe is a great person to work with. Highly recommended!",
+                "profile": "https://example.com/profile.jpg",
+                "linkedIn": "https://www.linkedin.com/in/johndoe/",
+            }
+        }
+    },
 
+    {
+        title: "Get testimonials",
+        name: "testimonial-api",
+        description: "Fetches all testimonials associated with a user, including details like the name, profile image, review, LinkedIn URL, and the status of approval.",
+        method: "GET",
+        endpoint: "/api/public/testimonials",
+        headers: {
+            "Authorization": "Bearer YOUR_API_TOKEN"
+        },
+        parameters: {
+            path: []
+        },
+        response: {
+            status: 200,
+            body: [
+                {
+                    "id": "1234567890abcdef",
+                    "name": "John Doe",
+                    "email": "johndoe@gmail.com",
+                    "review": "John Doe is a great person to work with. Highly recommended!",
+                    "profile": "https://example.com/profile.jpg",
+                    "linkedIn": "https://www.linkedin.com/in/johndoe/",
+                }
+            ]
+        }
+    }
     // {
     //     title: "Update project details",
     //     description: "Updates the details of a specific project. The project ID must be provided in the URL path.",
