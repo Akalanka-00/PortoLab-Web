@@ -52,6 +52,7 @@ const BarChart = ({ categories, data }) => {
         borderRadius: 5,
         pointPadding: 0.2,
         groupPadding: 0.1,
+        borderWidth: 0,
       },
     },
     tooltip: {
@@ -73,7 +74,7 @@ const BarChart = ({ categories, data }) => {
         name: "Data",
         data: data.map((value, index) => ({
           y: value,
-          color: index === 2 ? "#007bff" : index % 2 === 0 ? "#a3e4d7" : "#f5b7b1",
+          color: index === 2 ? "#007bff" : index % 2 === 0 ? "#FF0060" : "#1B9C85",
         })),
       },
     ],

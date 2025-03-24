@@ -5,6 +5,10 @@ import SparklineChart from '../../../components/charts/sparkLineChart/SparklineC
 import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
 import BarChart from '../../../components/charts/barChart/BarChart';
 import apiDocData from '../../../data/apiDoc.data';
+import { IoSchoolOutline  } from "react-icons/io5";
+import { MdOutlineBusinessCenter  } from "react-icons/md";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { VscDebugDisconnect } from "react-icons/vsc";
 
 const OverviewPage = () => {
   const [yesterdayPortfolioVisits, setYesterdayPortfolioVisits] = useState([]);
@@ -20,9 +24,39 @@ const OverviewPage = () => {
   const [lastWeekRawData, setLastWeekRawData] = useState([]);
   const [lastMonthRawData, setLastMonthRawData] = useState([]);
   const [summary, setSummary] = useState(
-    {categories: [], data: []}
+    { categories: [], data: [] }
   );
 
+
+  const shortcutData = [
+
+    {
+      title: 'Add new Project',
+      description: 'Add a new project to your collection',
+      icon: <AiOutlineFundProjectionScreen  />,
+      url: '/dashboard/projects/new'
+    },
+    {
+      title: 'Add new Educational Experience',
+      description: 'Add a new educational experience to your collection',
+      icon: <IoSchoolOutline   />,
+      url: '/dashboard/qualifications/education/new'
+    },
+
+    {
+      title: 'Add new Work Experience',
+      description: 'Add a new work experience to your collection',
+      icon: <MdOutlineBusinessCenter  ork  />,
+      url: '/dashboard/qualifications/work/new'
+    },
+
+    {
+      title: 'Create new API Token',
+      description: 'Create a new API token for your collection',
+      icon: <VscDebugDisconnect  />,
+      url: '/dashboard/webapi'
+    }
+  ];
   const apiCallAPI = new ApiCallAPI();
 
   // Process API data for chart visualization
@@ -40,12 +74,12 @@ const OverviewPage = () => {
         const currentHourDate = new Date(startDate);
         currentHourDate.setHours(startDate.getHours() + i); // Increment hour by i
 
-          filteredData.forEach(record => {
-            const apidate = new Date(record.calledAt);
-            if(apidate.getHours() === currentHourDate.getHours() && apidate.getDate() === currentHourDate.getDate()){
-              chartData[i] += 1;
-            }
-      });
+        filteredData.forEach(record => {
+          const apidate = new Date(record.calledAt);
+          if (apidate.getHours() === currentHourDate.getHours() && apidate.getDate() === currentHourDate.getDate()) {
+            chartData[i] += 1;
+          }
+        });
       }
 
     } else if (range === 'last_week') {
@@ -58,13 +92,13 @@ const OverviewPage = () => {
 
         filteredData.forEach(record => {
           const apidate = new Date(record.calledAt);
-          if(apidate.getDate() === currentWeekDate.getDate() && apidate.getMonth() === currentWeekDate.getMonth()){
+          if (apidate.getDate() === currentWeekDate.getDate() && apidate.getMonth() === currentWeekDate.getMonth()) {
             chartData[i] += 1;
           }
-    });
+        });
       }
     }
-    
+
     else if (range === 'last_month') {
       const arrSize = 31;
       chartData = new Array(arrSize).fill(0);
@@ -77,10 +111,10 @@ const OverviewPage = () => {
         filteredData.forEach(record => {
           const apidate = new Date(record.calledAt);
           console.log(`apidate: ${apidate.getDate()} ${apidate.getMonth()}`, `currentMonthDate: ${currentMonthDate.getDate()} ${currentMonthDate.getMonth()}`);
-          if(apidate.getDate() === currentMonthDate.getDate() && apidate.getMonth() === currentMonthDate.getMonth()){
+          if (apidate.getDate() === currentMonthDate.getDate() && apidate.getMonth() === currentMonthDate.getMonth()) {
             chartData[i] += 1;
           }
-    });
+        });
       }
 
       console.log("\n\n")
@@ -93,7 +127,7 @@ const OverviewPage = () => {
     }
     return chartData;
   };
-  
+
 
   // Fetch data and filter for Portfolio Visits & API Calls
   const fetchDataByTimeRange = async (range) => {
@@ -141,11 +175,11 @@ const OverviewPage = () => {
         total: yesterdayPortfolioVisits.reduce((a, b) => a + b, 0),
         data: yesterdayPortfolioVisits,
         efficiency:
-           (((yesterdayPortfolioVisits[yesterdayPortfolioVisits.length - 1] - yesterdayPortfolioVisits[0]) /
-                yesterdayPortfolioVisits.reduce((a, b) => a + b, 0)) *
-                100
-              ).toFixed(0)
-            ,
+          (((yesterdayPortfolioVisits[yesterdayPortfolioVisits.length - 1] - yesterdayPortfolioVisits[0]) /
+            yesterdayPortfolioVisits.reduce((a, b) => a + b, 0)) *
+            100
+          ).toFixed(0)
+        ,
       },
       {
         title: 'Last Month Portfolio Visits',
@@ -153,11 +187,11 @@ const OverviewPage = () => {
         total: lastMonthPortfolioVisits.reduce((a, b) => a + b, 0),
         data: lastMonthPortfolioVisits,
         efficiency:
-           (((lastMonthPortfolioVisits[lastMonthPortfolioVisits.length - 1] - lastMonthPortfolioVisits[0]) /
-              lastMonthPortfolioVisits.reduce((a, b) => a + b, 0)) *
-                100
-              ).toFixed(0)
-            
+          (((lastMonthPortfolioVisits[lastMonthPortfolioVisits.length - 1] - lastMonthPortfolioVisits[0]) /
+            lastMonthPortfolioVisits.reduce((a, b) => a + b, 0)) *
+            100
+          ).toFixed(0)
+
       },
       {
         title: 'Today Total API Calls',
@@ -165,8 +199,8 @@ const OverviewPage = () => {
         total: yesterdayApiCalls.reduce((a, b) => a + b, 0),
         data: yesterdayApiCalls,
         efficiency:
-           (((yesterdayApiCalls[yesterdayApiCalls.length - 1] - yesterdayApiCalls[0]) / yesterdayApiCalls.reduce((a, b) => a + b, 0)) * 100).toFixed(0)
-            
+          (((yesterdayApiCalls[yesterdayApiCalls.length - 1] - yesterdayApiCalls[0]) / yesterdayApiCalls.reduce((a, b) => a + b, 0)) * 100).toFixed(0)
+
       },
       {
         title: 'Last Month API Calls',
@@ -175,7 +209,7 @@ const OverviewPage = () => {
         data: lastMonthApiCalls,
         efficiency:
           (((lastMonthApiCalls[lastMonthApiCalls.length - 1] - lastMonthApiCalls[0]) / lastMonthApiCalls.reduce((a, b) => a + b, 0)) * 100).toFixed(0)
-           ,
+        ,
       },
     ]);
   }, [yesterdayPortfolioVisits, lastMonthPortfolioVisits, yesterdayApiCalls, lastMonthApiCalls]);
@@ -183,20 +217,20 @@ const OverviewPage = () => {
   useEffect(() => {
     if (yesterdayRawData.length > 0) {
       const apiNames = [...new Set(yesterdayRawData.map(item => item.apiName))];
-      const data = apiNames.map(apiName => 
+      const data = apiNames.map(apiName =>
         yesterdayRawData.filter(item => item.apiName === apiName).length
       );
       const categories = apiNames.map(apiName => apiName = apiDocData.find(item => item.name === apiName).title);
 
-      
+
       setSummary({ categories, data }); // Properly updating state
     }
-  }, [yesterdayRawData]); 
+  }, [yesterdayRawData]);
 
   const totalApiCallsTimeRangeHandler = (event) => {
     const timeRange = event.target.value;
     console.log('Time Range:', timeRange);
-    
+
     let apiCallData = [];
     switch (timeRange) {
       case 'day':
@@ -211,90 +245,122 @@ const OverviewPage = () => {
       default:
         apiCallData = yesterdayRawData;
     }
-  
+
     if (apiCallData.length > 0) {
       const apiNames = [...new Set(apiCallData.map(item => item.apiName))];
-      const data = apiNames.map(apiName => 
+      const data = apiNames.map(apiName =>
         apiCallData.filter(item => item.apiName === apiName).length
       );
       const categories = apiNames.map(apiName => apiName = apiDocData.find(item => item.name === apiName).title);
-  
-  
+
+
       setSummary({ categories, data });
     }
     setTotalApiCallsTimeRange(timeRange);
   };
-  
+
 
   return (
     <div className="overview-container">
       {error && <div className="error">{error}</div>}
 
-        <div className="top-cards-container">
-          {topCardData.map((data, index) => {
-            console.log(data);
-            const status = data.efficiency > 0;
-            if(data.total>0){
-              return (
-                <div key={index} className="top-card">
-                  <div className="header">
-                    <div className="card-title">{data.title}</div>
-                  </div>
-                  <div className="content">
-                    <div className="values">
-                      <div className="value">{data.value}</div>
-                      <div className="total">
-                        Total: <span>{data.total}</span>
-                      </div>
-                    </div>
-  
-                    <div className="chart">
-                      <SparklineChart data={data.data} />
-                    </div>
-                  </div>
-                  <div className="footer">
-                    <div className="trend-icon">
-                      {status ? <FaArrowTrendUp className="trend-up" /> : <FaArrowTrendDown className="trend-down" />}
-                    </div>
-                    <div className={`efficiency ${status ? 'trend-up' : 'trend-down'}`}>
-                      {data.efficiency}% <span>than last period</span>
-                    </div>
-                  </div>
+      <div className="top-cards-container">
+        {topCardData.map((data, index) => {
+          console.log(data);
+          const status = data.efficiency > 0;
+          if (data.total > 0) {
+            return (
+              <div key={index} className="top-card">
+                <div className="header">
+                  <div className="card-title">{data.title}</div>
                 </div>
-              );
-            }else{
-              return (
-                <div key={index} className="top-card">
-                  <div className="header">
-                    <div className="card-title">{data.title}</div>
+                <div className="content">
+                  <div className="values">
+                    <div className="value">{data.value}</div>
+                    <div className="total">
+                      Total: <span>{data.total}</span>
+                    </div>
                   </div>
-                  <div className="content">
-                    <div className="no-data-top-card"><span>No data available</span></div>
-                  </div>
-          
-                </div>
-              );
-            }
-          })}
-        </div>
-        <div className="second-cards-container">
-        <div className="summary-views">
-            <div className="header">
-              <div className="header-name">
-              <div className="chart-title">Total API calls</div>
-              </div>
-              <select name='time-duratin' id='time-duratin' className="header-filter" onChange={totalApiCallsTimeRangeHandler} value={totalApiCallsTimeRange}>
-                <option value="day">Today</option>
-                <option value="week">Last Week</option>
-                <option value="month">Last Month</option>
-              </select>
-            </div>
 
-            <div className="api-summary-container">
-              <BarChart categories={summary.categories} data={summary.data} />
+                  <div className="chart">
+                    <SparklineChart data={data.data} />
+                  </div>
+                </div>
+                <div className="footer">
+                  <div className="trend-icon">
+                    {status ? <FaArrowTrendUp className="trend-up" /> : <FaArrowTrendDown className="trend-down" />}
+                  </div>
+                  <div className={`efficiency ${status ? 'trend-up' : 'trend-down'}`}>
+                    {data.efficiency}% <span>than last period</span>
+                  </div>
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <div key={index} className="top-card">
+                <div className="header">
+                  <div className="card-title">{data.title}</div>
+                </div>
+                <div className="content">
+                  <div className="no-data-top-card"><span>No data available</span></div>
+                </div>
+
+              </div>
+            );
+          }
+        })}
+      </div>
+      <div className="second-cards-container">
+        <div className="summary-views">
+          <div className="header">
+            <div className="header-name">
+              <div className="chart-title">Total API calls</div>
             </div>
-            </div>
+            <select name='time-duratin' id='time-duratin' className="header-filter" onChange={totalApiCallsTimeRangeHandler} value={totalApiCallsTimeRange}>
+              <option value="day">Today</option>
+              <option value="week">Last Week</option>
+              <option value="month">Last Month</option>
+            </select>
+          </div>
+
+          <div className="api-summary-container">
+            <BarChart categories={summary.categories} data={summary.data} />
+          </div>
         </div>
+
+        <div className="dashboard-shortcuts">
+          <div className="header">
+            <div className="header-title">Shortcuts</div>
+          </div>
+          <div className="shortcuts-container">
+
+            {shortcutData.map((data, index) => {
+              return (
+                <div key={index} className="shortcut">
+                  <div className="shortcut-icon">
+                    {data.icon}
+                  </div>
+                  <div className="shortcut-content">
+                    <div className="shortcut-title">{data.title}</div>
+                    <div className="shortcut-description">{data.description}</div>
+                  </div>
+                </div>
+              );
+            })}
+            {/* <div className="shortcut">
+              <div className="shortcut-icon">
+                <FaPlusCircle />
+              </div>
+              <div className="shortcut-content">
+                <div className="shortcut-title">Add New API</div>
+                <div className="shortcut-description">Add a new API to your collection</div>
+              </div>
+            </div> */}
+
+          </div>
+        </div>
+      </div>
 
     </div>
   );

@@ -88,7 +88,86 @@ const apiDocData = [
         }
       },
 
-
+      {
+        title: "Get user skills",
+        name: "skills-api",
+        description: "Fetches the public skills of a user based on the provided API Token.",
+        method: "GET",
+        endpoint: "/api/public/skills",
+        headers: {
+            "Authorization": "Bearer YOUR_API_TOKEN"
+        },
+        parameters: {
+            path: []
+        },
+        response: {
+            status: 200,
+            body: [
+                {
+                    "id": "skill123",
+                    "name": "JavaScript",
+                    "icon": "https://example.com/icons/javascript.png",
+                    "expertLevel": "Beginner"
+                }
+            ]
+        }
+    },
+    {
+        title: "Get user education experiences",
+        name: "education-api",
+        description: "Fetches the public education history of a user based on the provided API Token.",
+        method: "GET",
+        endpoint: "/api/public/education",
+        headers: {
+            "Authorization": "Bearer YOUR_API_TOKEN"
+        },
+        parameters: {
+            path: []
+        },
+        response: {
+            status: 200,
+            body: [
+                {
+                    "id": "edu123",
+                    "college": "University of Example",
+                    "course": "Bachelor of Science in Computer Science",
+                    "startYear": 2019,
+                    "endYear": 2023,
+                    "startMonth": 9,
+                    "endMonth": 6,
+                }
+            ]
+        }
+    },
+    {
+        title: "Get user work experiences",
+        name: "experience-api",
+        description: "Fetches the public work experiences of a user based on the provided API Token.",
+        method: "GET",
+        endpoint: "/api/public/experience",
+        headers: {
+            "Authorization": "Bearer YOUR_API_TOKEN"
+        },
+        parameters: {
+            path: []
+        },
+        response: {
+            status: 200,
+            body: [
+                {
+                    "id": "exp123",
+                    "company": "Example Corp",
+                    "role": "Software Engineer",
+                    "startYear": 2019,
+                    "endYear": 2023,
+                    "startMonth": 9,
+                    "endMonth": 6,
+                    "stillWorking": false,
+                    "description": "Worked on various projects and collaborated with team members."
+                }
+            ]
+        }
+    },
 
 
     // {

@@ -1,15 +1,45 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './createSkill.scss';
 import placeholder from '../../../../assets/images/placeholder.jpg';
+import { SkillAPI } from '../../../../api/skill/skill.api';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const CreateSkillPage = () => {
     const ref = useRef(null);
+    const navigate = useNavigate();
+    const { id } = useParams(); // Get Skill ID from URL
+    const location = useLocation();
+    const skillApi = new SkillAPI();
+
+    const isEditMode = location.pathname.includes('/edit/');
+    const isViewMode = location.pathname.includes('/view/');
+
     const [image, setImage] = useState(null);
     const [formData, setFormData] = useState({
         skillName: '',
         expertLevel: 'Beginner',
+        status: "public",
     });
-    const [skills, setSkills] = useState([]);
+
+    // Fetch existing skill data if in edit/view mode
+    useEffect(() => {
+        if (id && (isEditMode || isViewMode)) {
+            fetchSkillData();
+        }
+    }, [id]);
+
+    const fetchSkillData = async () => {
+        const response = await skillApi.getSkillById(id);
+        if (response) {
+            setFormData({
+                skillName: response.name || '',
+                expertLevel: response.level || 'Beginner',
+                status: response.status || "public",
+            });
+            setImage(response.icon || placeholder);
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({
@@ -27,34 +57,50 @@ const CreateSkillPage = () => {
         }
     };
 
-    const handleAddSkill = () => {
+    const handleSubmit = async () => {
         if (!formData.skillName) {
-            alert('Please enter a skill name!');
+            Swal.fire('Error', 'Please enter a skill name!', 'error');
             return;
         }
-        const newSkill = {
+
+        const skillData = {
             name: formData.skillName,
             icon: image || placeholder,
             level: formData.expertLevel,
+            status: formData.status
         };
-        setSkills([...skills, newSkill]);
-        setFormData({ skillName: '', expertLevel: 'Beginner' }); // Reset form
-        setImage(null); // Reset image
+
+        let response;
+        if (isEditMode) {
+            response = await skillApi.updateSkill(id, skillData);
+        } else if (isViewMode) {
+            navigate(`/dashboard/skills/edit/${id}`);
+            return;
+        } else {
+            response = await skillApi.addSkill(skillData);
+        }
+
+        if (response) {
+            Swal.fire({
+                icon: 'success',
+                position: 'top-end',
+                title: isEditMode ? 'Skill updated successfully!' : 'New Skill added successfully!',
+                showConfirmButton: false,
+                timer: 1500,
+            });
+            navigate('/dashboard/skills');
+        }
     };
 
     const resetForm = () => {
-        setFormData({ skillName: '', expertLevel: 'Beginner' });
+        setFormData({ skillName: '', expertLevel: 'Beginner', status: "public", });
         setImage(null);
-    };
-
-    const handleRemoveSkill = (skillToRemove) => {
-        setSkills(skills.filter((skill) => skill.name !== skillToRemove.name));
     };
 
     return (
         <div className="add-skill-container">
             <div className="header">
-                <div className="header-title">Add Skill</div>
+                <div className="header-title">{isEditMode ? 'Edit Skill' : isViewMode ? 'View Skill' : 'Add Skill'}</div>
             </div>
 
             <div className="skill-form-container">
@@ -73,6 +119,7 @@ const CreateSkillPage = () => {
                             value={formData.skillName}
                             onChange={handleChange}
                             placeholder='Enter Skill Name'
+                            disabled={isViewMode}
                         />
                     </div>
 
@@ -82,16 +129,18 @@ const CreateSkillPage = () => {
                         <img
                             src={image || placeholder}
                             className='skill-icon-img'
-                            onClick={() => ref.current?.click()}
+                            onClick={() => !isViewMode && ref.current?.click()}
                             alt="Skill Icon"
                         />
-                        <input
-                            type="file"
-                            className="form-input d-none"
-                            ref={ref}
-                            accept="image/*"
-                            onChange={handleImageUpload}
-                        />
+                        {!isViewMode && (
+                            <input
+                                type="file"
+                                className="form-input d-none"
+                                ref={ref}
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                            />
+                        )}
                     </div>
 
                     {/* Expert Level */}
@@ -102,6 +151,7 @@ const CreateSkillPage = () => {
                             className="form-input"
                             value={formData.expertLevel}
                             onChange={handleChange}
+                            disabled={isViewMode}
                         >
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
@@ -109,15 +159,17 @@ const CreateSkillPage = () => {
                         </select>
                     </div>
 
-
                     <div className="submit-form-group">
+                        {(!isEditMode && !isViewMode) ? (
                             <button className="portolab-btn-secondary submit-btn" onClick={() => resetForm()}>Reset</button>
-                            
-                            <button className="portolab-btn submit-btn" onClick={handleAddSkill}>Create</button>
-                        </div>
+                        ):(<div></div>)}
+
+                        <button className="portolab-btn submit-btn" onClick={handleSubmit}>
+                            {isEditMode ? "Update" : isViewMode ? "Edit" : "Create"}
+                        </button>
+                    </div>
                 </div>
             </div>
-
         </div>
     );
 };

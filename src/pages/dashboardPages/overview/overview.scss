@@ -121,8 +121,9 @@
     width: 100%;
     margin: 3rem 0rem;
     display: grid;
-    grid-template-columns: 60% 35%;
+    grid-template-columns: 60% 39%;
     gap: 1rem;
+    padding: 1rem;
 
     .summary-views {
       width: 100%;
@@ -176,6 +177,83 @@
 
       .api-summary-container {
         padding: 2rem 1rem;
+      }
+    }
+
+    .dashboard-shortcuts{
+      width: 100%;
+      background-color: var(--color-white);
+      border-radius: 10px;
+      color: var(--color-dark);
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        gap: 1rem;
+
+        .header-title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 1rem;
+        
+        } 
+      }
+
+      .shortcuts-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        border-top: 1px solid var(--color-background);
+        width: 100%;
+
+        .shortcut{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 2rem;
+          width: 100%;
+          color: white;
+          background-color: var(--color-primary);
+          border: 1px solid var(--color-primary);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          transition: background-color 0.3s;
+
+          &:hover{
+            background-color: transparent;
+            color: var(--color-primary);
+          }
+
+          .shortcut-icon{
+            font-size: 2rem;
+          }
+
+          .shortcut-content{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.3rem;
+
+            .shortcut-title{
+              font-size: 1.2rem;
+              font-weight: 600;
+            }
+
+            .shortcut-description{
+              font-size: 0.8rem;
+            }
+          }
+          
+        }
       }
     }
   }
