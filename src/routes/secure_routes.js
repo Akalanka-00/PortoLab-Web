@@ -40,6 +40,8 @@ function SecureRoutes() {
         <Route path="qualifications/work/view/:id" element={<CreateWorkExperiencePage />} />
 
         <Route path="skills/new" element={<CreateSkillPage />} />
+        <Route path="skills/edit/:id" element={<CreateSkillPage />} />
+        <Route path="skills/view/:id" element={<CreateSkillPage />} />
 
         <Route path="settings" element={<SettingsPage />} />
 

@@ -34,7 +34,7 @@ function TokenModal({ show, setShow }) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3 d-flex flex-row align-center" controlId="exampleForm.ControlInput1">
             <Form.Label className="token-modal-url-input">Portfolio URL</Form.Label>
             <Form.Control type="text" placeholder="www.portfolio.com" autoFocus value={token} onChange={(e)=> setToken(e.target.value)} />
           </Form.Group>

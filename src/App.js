@@ -5,7 +5,7 @@ import SecureRoutes from "./routes/secure_routes";
 function App() {
   return (
     <div className="App">
-<BrowserRouter>
+      <BrowserRouter>
         <Routes>
           {PublicRoutes()}
           {SecureRoutes()}
