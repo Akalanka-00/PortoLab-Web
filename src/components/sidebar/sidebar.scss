@@ -9,19 +9,21 @@
 
     }
     .header{
-        display: inline-block;
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
         gap: 0;
         margin: 0;
         padding: 0;
         line-height: 0;
-        text-align: center;
+        align-items: center;
+        justify-content: flex-start;
 
         .header-icon{
-            font-size: 3rem;
-            color: var(--softTextColor);
-            margin: 0;
-            padding: 0;
+            // font-size: 3rem;
+            // color: var(--softTextColor);
+            // margin: 0;
+            // padding: 0;
+            width: 50px;
         }
     
         .header-text{

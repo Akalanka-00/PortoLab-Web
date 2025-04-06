@@ -1,0 +1,13 @@
+.api-setup-container{
+    padding-bottom: 5rem;
+    .api-setup-content{
+
+        pre{
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 0.6rem 0rem;
+        }
+    }
+}

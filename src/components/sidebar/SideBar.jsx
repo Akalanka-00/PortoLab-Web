@@ -7,6 +7,7 @@ import { TbLogout } from 'react-icons/tb'
 import { IoSettingsOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import Logo from '../../assets/images/logo.png'
 const SideBar = () => {
 
     const [activeMenu, setActiveMenu] = useState(-1);
@@ -47,7 +48,8 @@ const SideBar = () => {
         <div className='sidebar-container'>
             <div className="header">
                 {/* <GiF1Car className="header-icon" /> */}
-                <div className='header-text'>PortoLab</div>
+                <img src={Logo} alt="Logo" className="header-icon" />
+                <div className='header-text'>PMT</div>
             </div>
 
             <div className="sidebar-content">
