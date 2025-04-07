@@ -166,15 +166,19 @@
     position: relative;
     overflow: hidden;
     z-index: 1;
-
-    .about-container{
+  
+    p{
+      text-align: justify;
+    }
+    .about-container {
       margin: 0 8rem;
     }
+  
     .about-container h3 {
       color: #124265;
       font-size: 2rem;
     }
-
+  
     .portfolio-img {
       display: block;
       object-fit: cover;
@@ -183,40 +187,79 @@
       box-shadow: 0 0 29px 0 rgba(0, 0, 0, 0.1);
       width: 100%;
     }
-
+  
     .pmt-features {
       margin: 1rem;
-
+  
       .pmt-feature {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
         gap: 20px;
-
+  
         .check-icon {
           color: #24ce6b;
         }
       }
     }
-  }
-
-  @media (max-width: 991px) {
-    .about {
-      .portfolio-img {
-        display: none;
+  
+    // Mobile and tablet responsive styles
+    @media (max-width: 991px) {
+      .about {
+        .about-container {
+          margin: 0 2rem; // Reduce the margin on smaller screens
+        }
+  
+        .portfolio-img {
+          display: none; // Hide image on mobile
+        }
+  
+        .content {
+          text-align: center; // Center align the content
+          padding: 1rem; // Add some padding for better spacing
+        }
+  
+        .content h3 {
+          font-size: 32px;
+          font-weight: 700;
+          margin-bottom: 15px;
+          text-transform: uppercase;
+          text-align: center;
+        }
+  
+        .pmt-features {
+          margin: 0; // Remove margin on smaller screens
+          padding: 0; // Remove padding for better mobile layout
+  
+          .pmt-feature {
+            justify-content: center; // Center the features
+            text-align: center; // Center the feature text
+            margin: 10px 0; // Add space between features
+          }
+        }
       }
     }
-
-    .content h3 {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-      text-align: center;
+  
+    // For very small screens (mobile portrait)
+    @media (max-width: 576px) {
+      .about-container {
+        margin: 0 1rem; // Even smaller margin
+      }
+  
+      .content h3 {
+        font-size: 28px; // Make heading slightly smaller for smaller screens
+      }
+  
+      .pmt-features {
+        .pmt-feature {
+          font-size: 14px; // Adjust font size of features
+          gap: 15px; // Reduce gap between the icon and text
+        }
+      }
     }
   }
-
+  
 
 .services .section-title span{
     color: #124265;

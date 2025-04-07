@@ -6,10 +6,11 @@
     z-index: 997;
     border-bottom: 1px solid color-mix(in srgb, #2487ce, transparent 85%);
 
-    .navbar-container-xl{
+    .navbar-container-xl {
         padding: 0 2rem;
         padding-right: 5rem;
     }
+
     .logo {
         line-height: 1;
 
@@ -53,17 +54,46 @@
             order: 1;
         }
 
-        .btn-getstarted {
-            order: 2;
-            margin: 0 15px 0 0;
-            padding: 6px 15px;
-        }
-
         .navmenu {
             order: 3;
         }
+
+        .btn-getstarted {
+            display: none;
+        }
     }
 }
+
+@media (max-width: 1199px) {
+    .mobile-nav-active {
+        .navmenu {
+            position: fixed;
+            inset: 0;
+            background: rgba(33, 37, 41, 0.8);
+            transition: 0.3s;
+
+            // Add flexbox centering here
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .navmenu>ul {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+        }
+
+        
+    }
+
+}
+
 
 @media (min-width: 1200px) {
     .navmenu {
@@ -75,6 +105,7 @@
             display: flex;
             list-style: none;
             align-items: center;
+            justify-content: center;
         }
 
 
@@ -124,6 +155,9 @@
         margin-right: 10px;
         cursor: pointer;
         transition: color 0.3s;
+        position: absolute;
+        top: 0.4rem;
+        right: 1rem;
     }
 
     .navmenu {
@@ -143,47 +177,47 @@
             transition: 0.3s;
             z-index: 9998;
             box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
-          }
+        }
 
         .navitem,
         .navitem:focus {
-          color: #124265;
-          padding: 10px 20px;
-          font-family: var(--nav-font);
-          font-size: 17px;
-          font-weight: 500;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          white-space: nowrap;
-          transition: 0.3s;
-
-        i {
-            font-size: 12px;
-            line-height: 0;
-            margin-left: 5px;
-            width: 30px;
-            height: 30px;
+            color: #124265;
+            padding: 10px 20px;
+            font-family: var(--nav-font);
+            font-size: 17px;
+            font-weight: 500;
             display: flex;
             align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            justify-content: space-between;
+            white-space: nowrap;
             transition: 0.3s;
-            background-color: color-mix(in srgb, #2487ce, transparent 90%);
-            cursor: pointer;
 
-            &:hover{
-                background-color: #2487ce;
-                color: #ffffff;
+            i {
+                font-size: 12px;
+                line-height: 0;
+                margin-left: 5px;
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: 0.3s;
+                background-color: color-mix(in srgb, #2487ce, transparent 90%);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #2487ce;
+                    color: #ffffff;
+                }
             }
-        }
         }
 
         .active i,
         .active:focus i {
-          background-color: #2487ce;
-          color: #ffffff;
-          transform: rotate(180deg);
+            background-color: #2487ce;
+            color: #ffffff;
+            transform: rotate(180deg);
         }
     }
 
@@ -198,20 +232,20 @@
             right: 15px;
             margin-right: 0;
             z-index: 9999;
-          }
+        }
 
-          .navmenu {
+        .navmenu {
             position: fixed;
             overflow: hidden;
             inset: 0;
             background: rgba(33, 37, 41, 0.8);
             transition: 0.3s;
-          }
+        }
 
-          .navmenu>ul {
+        .navmenu>ul {
             display: block;
-          }
-      }
-    
+        }
+    }
+
 
 }
