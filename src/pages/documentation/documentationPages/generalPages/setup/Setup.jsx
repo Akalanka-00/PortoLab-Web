@@ -1,8 +1,13 @@
 import React from 'react'
 import './setup.scss'
+import { useNavigate } from 'react-router-dom';
 
 const SetupPage = () => {
+    const navigate = useNavigate();
 
+    const handleDetectOriginNavigation = () => {
+        navigate('/documentation/general/detect-origin');
+    };
     return (
         <div className='api-setup-container'>
             <div className='api-setup-content'>
@@ -18,9 +23,23 @@ const SetupPage = () => {
                         <pre><code>Authorization: Bearer YOUR_API_TOKEN</code></pre>
                     </li>
                 </ol>
+
+                <div className="api-warning-box">
+                <p><strong className='text-danger'>⚠️ Warning:</strong> While you can generate a token without providing a portfolio URL (i.e., with a <code>null</code> origin), this is highly discouraged and insecure.</p>
+                <p>To learn how to properly identify and set your origin, please visit our&nbsp;
+                    <span
+                        className="detect-origin-link"
+                        style={{ color: '#007bff', cursor: 'pointer', textDecoration: 'underline' }}
+                        onClick={handleDetectOriginNavigation}
+                    >
+                        Detect Origin Guide
+                    </span>.
+                </p>
+            </div>
                 <p>If you need to revoke the token, return to the <strong>API Tokens</strong> section and click <strong>Revoke</strong> next to the token.</p>
 
                 <h2>Step 2: Make API Calls</h2>
+                <pre><code></code>{process.env.REACT_APP_BASE_URL}</pre>
                 <p>Once you have your API token, you can start making requests to the PMT API. Follow these steps:</p>
                 <ol>
                     <li>Ensure that your API token is securely stored and accessible (e.g., in environment variables).</li>
@@ -31,7 +50,7 @@ const SetupPage = () => {
 
                 <pre>
                     <code>
-                        {'fetch(\'https://api.portolab.com/your-endpoint\', { {\n' +
+                        {`fetch(\'https://${process.env.REACT_APP_BASE_URL}/your-endpoint\', { {\n` +
                             '  method: \'GET\',\n' +
                             '  headers: { {\n' +
                             '    \'Authorization\': \'Bearer YOUR_API_TOKEN\',\n' +

@@ -35,6 +35,22 @@
           font-size: 1rem;
           color: var(--color-dark);
 
+          .linkedin-icon {
+            font-size: 1rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            border: 1px solid var(--color-primary);
+            padding: 0.3rem 0.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+              background-color: var(--color-primary);
+              color: var(--color-white);
+            }
+          }
+
           .testimonial-options {
             color: var(--color-dark);
             padding: 0.5rem;
@@ -46,9 +62,9 @@
               right: 2.5rem;
               top: 3rem;
               z-index: 1;
-              background-color: var(--color-background);
+              background-color: var(--color-white);
               border-radius: 10px;
-              border: 1px solid var(--color-light);
+              border: 2px solid var(--color-separator);
               box-shadow: var(--box-shadow);
               padding: 1rem;
               display: flex;

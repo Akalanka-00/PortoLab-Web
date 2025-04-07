@@ -33,27 +33,27 @@ const OverviewPage = () => {
   const shortcutData = [
 
     {
-      title: 'Add new Project',
+      title: 'It\'s a new project',
       description: 'Add a new project to your collection',
       icon: <AiOutlineFundProjectionScreen  />,
       url: '/dashboard/projects/new'
     },
     {
-      title: 'Add new Educational Experience',
+      title: 'Just learn something new',
       description: 'Add a new educational experience to your collection',
       icon: <IoSchoolOutline   />,
       url: '/dashboard/qualifications/education/new'
     },
 
     {
-      title: 'Add new Work Experience',
+      title: 'I\'ve got a new job',
       description: 'Add a new work experience to your collection',
       icon: <MdOutlineBusinessCenter  ork  />,
       url: '/dashboard/qualifications/work/new'
     },
 
     {
-      title: 'Create new API Token',
+      title: 'Create a new API token',
       description: 'Create a new API token for your collection',
       icon: <VscDebugDisconnect  />,
       url: '/dashboard/webapi'
@@ -333,7 +333,7 @@ const OverviewPage = () => {
 
         <div className="dashboard-shortcuts">
           <div className="header">
-            <div className="header-title">Shortcuts</div>
+            <div className="header-title">Quick Actions</div>
           </div>
           <div className="shortcuts-container">
 
@@ -345,20 +345,11 @@ const OverviewPage = () => {
                   </div>
                   <div className="shortcut-content">
                     <div className="shortcut-title">{data.title}</div>
-                    <div className="shortcut-description">{data.description}</div>
+                    {/* <div className="shortcut-description">{data.description}</div> */}
                   </div>
                 </div>
               );
             })}
-            {/* <div className="shortcut">
-              <div className="shortcut-icon">
-                <FaPlusCircle />
-              </div>
-              <div className="shortcut-content">
-                <div className="shortcut-title">Add New API</div>
-                <div className="shortcut-description">Add a new API to your collection</div>
-              </div>
-            </div> */}
 
           </div>
         </div>

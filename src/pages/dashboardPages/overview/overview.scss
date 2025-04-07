@@ -19,7 +19,7 @@
       padding: 1rem;
       background-color: var(--color-white);
       border-radius: 10px;
-      box-shadow: var(--box-shadow);
+      box-shadow: var(--card-box-shadow);
 
       .header {
         .card-title {
@@ -130,6 +130,7 @@
       background-color: var(--color-white);
       border-radius: 10px;
       padding: 1rem;
+      box-shadow: var(--card-box-shadow);
 
       .header {
         width: 100%;
@@ -164,7 +165,8 @@
           border-radius: 10px;
           padding: 0.3rem 0.5rem;
           color: var(--color-dark);
-          background-color: var(--color-background);
+          background-color: var(--color-white);
+          border: 2px solid var(--color-separator);
 
           option {
             color: var(--color-dark);
@@ -185,6 +187,7 @@
       background-color: var(--color-white);
       border-radius: 10px;
       color: var(--color-dark);
+      box-shadow: var(--card-box-shadow);
 
       .header {
         display: flex;
@@ -204,52 +207,76 @@
       }
 
       .shortcuts-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
+        // display: flex;
+        // flex-direction: column;
+        // align-items: center;
+        // justify-content: flex-start;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
         padding: 1rem 2rem;
-        border-top: 1px solid var(--color-background);
         width: 100%;
 
         .shortcut{
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           align-items: center;
           justify-content: flex-start;
-          gap: 2rem;
+          gap: 1rem;
           width: 100%;
-          color: white;
+          color: var(--color-dark);
           background-color: var(--color-primary);
           border: 1px solid var(--color-primary);
           padding: 0.5rem 1rem;
           border-radius: 20px;
           transition: background-color 0.3s;
+          box-shadow: var(--card-box-shadow);
+          cursor: pointer;
+
+          &:nth-child(1){
+            background-color: var(--color-1);
+            border: 1px solid var(--color-1);
+          }
+
+          &:nth-child(2){
+            background-color: var(--color-2);
+            border: 1px solid var(--color-2);
+          }
+
+          &:nth-child(3){
+            background-color: var(--color-3);
+            border: 1px solid var(--color-3);
+          }
+
+          &:nth-child(4){
+            background-color: var(--color-4);
+            border: 1px solid var(--color-4);
+          }
 
           &:hover{
             background-color: transparent;
-            color: var(--color-primary);
           }
-
+          
           .shortcut-icon{
-            font-size: 2rem;
+            font-size: 4rem;
           }
 
           .shortcut-content{
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
             gap: 0.3rem;
 
             .shortcut-title{
               font-size: 1.2rem;
               font-weight: 600;
+              text-align: center;
             }
 
             .shortcut-description{
               font-size: 0.8rem;
+              text-align: center;
             }
           }
           

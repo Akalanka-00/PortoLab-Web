@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./home.scss"
 import HomeNavbar from '../../components/homeNavbar/HomeNavbar'
 import DashboardImage from '../../assets/images/dashboard.png'
@@ -18,6 +18,7 @@ import {
   FaInfoCircle,
   FaCommentDots,
 } from 'react-icons/fa';
+import Aos from 'aos'
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -90,6 +91,11 @@ const HomePage = () => {
     },
   ];
 
+  useEffect(() => {
+    Aos.init();
+    Aos.refresh();
+  }, []);
+
   return (
     <div className="home-container">
       <HomeNavbar />
@@ -122,7 +128,7 @@ const HomePage = () => {
 
       <section id="about" className="about section">
         <div className="about-container">
-        <h3>About PortoLab</h3>
+        <h3>About PMT</h3>
           <div className="row">
             <div className="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
               <img src={PortfolioImage} className="img-fluid portfolio-img" alt="" />

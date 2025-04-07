@@ -17,8 +17,17 @@ function TokenModal({ show, setShow }) {
     }
   }, [show]); // Runs only when `show` changes
 
-  const handleClose = async () => {
+  const handleSubmit = async () => {
+    if(token === "") {
+      alert("Please enter a valid token URL");
+      return;
+    }
     await tokenApi.generateToken(token);
+    setShow(false);
+  };
+
+  
+  const handleClose = async () => {
     setShow(false);
   };
 
@@ -33,18 +42,16 @@ function TokenModal({ show, setShow }) {
         <div className="modal-title">Add new Token</div>
       </Modal.Header>
       <Modal.Body>
-        <Form>
-          <Form.Group className="mb-3 d-flex flex-row align-center" controlId="exampleForm.ControlInput1">
-            <Form.Label className="token-modal-url-input">Portfolio URL</Form.Label>
-            <Form.Control type="text" placeholder="www.portfolio.com" autoFocus value={token} onChange={(e)=> setToken(e.target.value)} />
-          </Form.Group>
-        </Form>
+          <div className="token-form-group" controlId="exampleForm.ControlInput1">
+            <label >Portfolio URL</label>
+            <input type="url" required placeholder="www.portfolio.com" autoFocus value={token} onChange={(e)=> setToken(e.target.value)} />
+          </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={handleSubmit}>
           Save Changes
         </Button>
       </Modal.Footer>

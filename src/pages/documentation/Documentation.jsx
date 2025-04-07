@@ -25,6 +25,10 @@ const DocumentationPage = () => {
             <div className="api-sidebar-item" onClick={()=> navigate(`/documentation/general/setup`)}>
               Setup APIs
             </div>
+
+            <div className="api-sidebar-item" onClick={()=> navigate(`/documentation/general/detect-origin`)}>
+              Detect Origin
+            </div>
           </div>
 
           <div className="api-doc-sidebar-container">

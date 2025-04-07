@@ -9,7 +9,7 @@
         width: 100%;
         padding: 1rem;
         border-radius: 10px;
-        box-shadow: var(--box-shadow);
+        box-shadow: var(--card-box-shadow);
         background-color: var(--color-white);
         width: 100%;
         display: flex;
@@ -72,11 +72,18 @@
                 text-align: start;
                 border: none;
                 outline: none;
-                background-color: var(--color-background);
+                background-color: var(--color-white);
+                border: 1px solid var(--color-separator);
                 text-overflow: ellipsis;
                 padding: 0.5rem;
                 padding-left: 1rem;
                 border-radius: 5px;
+
+                &:focus{
+                    border: 1px solid var(--color-seperator-focus);
+                    outline: none;
+                    background-color: var(--color-white);
+                }
             }
 
         }
@@ -96,7 +103,7 @@
             gap: 1rem;
             padding: 1rem;
             border-radius: 10px;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--card-box-shadow);
             background-color: var(--color-white);
 
             .cv-upload-title{
@@ -124,7 +131,7 @@
             gap: 1rem;
             padding: 1rem;
             border-radius: 10px;
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--card-box-shadow);
             background-color: var(--color-white);
 
             .bio-title{
@@ -139,12 +146,14 @@
                 font-size: 1rem;
                 font-weight: 400;
                 color: var(--color-dark);       
-                background-color: var(--color-background);
+                background-color: var(--color-white);
                 padding: 1rem;
                 border-radius: 10px;
                 border: none;
                 outline: none;
                 resize: none;
+                border: 1px solid var(--color-separator);
+
             }
 
             .bio-leading-btn{

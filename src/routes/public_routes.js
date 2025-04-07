@@ -7,6 +7,7 @@ import DocumentationPage from "../pages/documentation/Documentation";
 import IntroductionPage from "../pages/documentation/documentationPages/generalPages/introduction/Introduction";
 import SetupPage from "../pages/documentation/documentationPages/generalPages/setup/Setup";
 import ApiPage from "../pages/documentation/documentationPages/api/Api";
+import DetectOriginPage from "../pages/documentation/documentationPages/generalPages/detectOrigin/DetectOriginPage";
 
 
 function PublicRoutes() {
@@ -21,6 +22,7 @@ function PublicRoutes() {
             <Route path="/documentation/general/*" element={<DocumentationPage />} >
                 <Route index element={<IntroductionPage />} />
                 <Route path="setup" element={<SetupPage />} />
+                <Route path="detect-origin" element={<DetectOriginPage />} />
             </Route>
             <Route path="/documentation/api/:name" element={<DocumentationPage />}>
                 <Route index element={<ApiPage />} />

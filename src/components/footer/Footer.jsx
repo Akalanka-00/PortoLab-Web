@@ -9,9 +9,9 @@ const Footer = () => {
       <div className="row gy-4">
         <div className="col-lg-5 col-md-12 footer-about">
           <a href="index.html" className="logo d-flex align-items-center">
-            <span className="sitename">OnePage</span>
+            <span className="sitename">Portfolio Management Terminal (PMT)</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>PMT is a powerful API-based portfolio builder that lets developers and professionals create, manage, and update personal portfolios effortlessly—no code changes required.</p>
           <div className="social-links d-flex mt-4">
             <a href=""><i className="bi bi-twitter-x"></i></a>
             <a href=""><i className="bi bi-facebook"></i></a>
