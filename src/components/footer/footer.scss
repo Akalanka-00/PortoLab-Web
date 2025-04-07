@@ -112,7 +112,6 @@
 
   .copyright {
     padding: 25px 0;
-    margin: 0 5rem;
     background-color: #2487ce;
     color: #ffffff;
     height: fit-content;
@@ -132,4 +131,20 @@
   a {
     color: color-mix(in srgb, #ffffff, transparent 30%);
   }
+}
+
+@media screen and (min-width: 1200px) {
+  .copyright {
+    margin: 0 2rem;
+
+  }
+  
+}
+
+@media screen and (max-width: 1200px) {
+  .copyright {
+    margin: 0 0rem;
+
+  }
+  
 }

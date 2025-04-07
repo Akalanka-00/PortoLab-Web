@@ -52,6 +52,7 @@
     .home-navbar {
         .logo {
             order: 1;
+            width: 40%;
         }
 
         .navmenu {
@@ -129,6 +130,7 @@
             white-space: nowrap;
             transition: 0.3s;
             cursor: pointer;
+            text-decoration: none;
 
             i {
                 font-size: 12px;
