@@ -18,13 +18,14 @@ function TokenModal({ show, setShow }) {
   }, [show]); // Runs only when `show` changes
 
   const handleSubmit = async () => {
-    if(token === "") {
-      alert("Please enter a valid token URL");
-      return;
+    if (token.startsWith("http://") || token.startsWith("https://")) {
+      await tokenApi.generateToken(token);
+      setShow(false);
+    } else {
+      alert("Token must start with http:// or https://");
     }
-    await tokenApi.generateToken(token);
-    setShow(false);
   };
+  
 
   
   const handleClose = async () => {

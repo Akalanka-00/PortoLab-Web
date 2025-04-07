@@ -24,6 +24,10 @@
                 transition: background-color 0.3s;
                 cursor: default;
 
+                &:nth-child(odd) {
+                    background-color: var(--color-separator);
+                }
+                
                 &:last-child {
                     border-bottom: none;
                     border-radius: 0 0 5px 5px;

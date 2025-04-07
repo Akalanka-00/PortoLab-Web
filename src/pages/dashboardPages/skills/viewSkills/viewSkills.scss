@@ -20,9 +20,12 @@
 
     tbody {
       tr {
-        border-bottom: 1px solid var(--color-white);
-        transition: background-color 0.3s;
         cursor: default;
+        border-radius: 10px;
+
+        &:nth-child(odd) {
+          background-color: var(--color-separator);
+        }
 
         &:last-child {
           border-bottom: none;
@@ -34,10 +37,11 @@
           padding: 10px;
           font-size: 1rem;
           color: var(--color-dark);
-
+          background-color: inherit;
           img {
-            width: 50px;
+            width: 40px;
             border-radius: 5px;
+            aspect-ratio: 1/1;
           }
 
           &.skill-options {
