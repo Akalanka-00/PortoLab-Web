@@ -112,6 +112,7 @@
 
   .copyright {
     padding: 25px 0;
+    background-color: #2487ce;
     color: #ffffff;
     height: fit-content;
 
@@ -134,7 +135,6 @@
 
 @media screen and (min-width: 1200px) {
   .copyright {
-    background-color: #2487ce;
     margin: 0 2rem;
 
   }
@@ -143,7 +143,6 @@
 
 @media screen and (max-width: 1200px) {
   .copyright {
-    background-color: red;
     margin: 0 0rem;
 
   }
