@@ -9,11 +9,14 @@ import { HiMiniBell } from 'react-icons/hi2'
 import Profile from "../../assets/images/profile.png"
 import { RiInformation2Line } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
+import { ProfileAPI } from '../../api/profile/profile.api';
 
 const Navbar = () => {
+  const profileAPI = new ProfileAPI();
   const navigate = useNavigate();
 
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [profilePic, setProfilePic] = useState(Profile);
   const toggleTheme = (theme) => {
     setTheme(theme);
     localStorage.setItem('theme', theme);
@@ -21,36 +24,18 @@ const Navbar = () => {
 
   }
 
-  const getProfile = () => {
-    const json = localStorage.getItem('user');
-    const user = JSON.parse(json);
-
-    if (user && user.picture) {
-      // Fetch the image and convert it to Base64
-      const imageUrl = user.picture;
-      return fetch(imageUrl)
-        .then(response => response.blob())
-        .then(blob => {
-          return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onloadend = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
-          });
-        })
-        .catch(error => {
-          console.error("Error converting image to Base64:", error);
-          return Profile; // Return a default profile if error occurs
-        });
+  const getProfile = async () => {
+    const data = await profileAPI.getProfile();
+    if (data) {
+      setProfilePic(data.profile || Profile);
     }
-
-    return Profile; // Return a default profile if user or picture is not found
   };
 
 
   useEffect(() => {
     const localTheme = localStorage.getItem('theme');
     localTheme && toggleTheme(localTheme);
+    getProfile();
   }, []);
 
   return (
@@ -62,13 +47,13 @@ const Navbar = () => {
       <div className="navbar-trailing">
 
         <div className="option-panel">
-        <RiInformation2Line   className='option-icon' onClick={()=> navigate("/documentation")}/>
+          <RiInformation2Line className='option-icon' onClick={() => navigate("/documentation")} />
           {theme === 'light' ? <FaMoon onClick={() => toggleTheme('dark')} className='option-icon'></FaMoon > : <IoSunnySharp onClick={() => toggleTheme('light')} className='option-icon' />}
           <HiMiniBell className='option-icon' />
         </div>
 
         <div className="profile">
-          <img src={Profile} alt="profile" />
+          <img src={profilePic} alt="profile" />
         </div>
       </div>
     </div>
