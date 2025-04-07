@@ -1,9 +1,15 @@
 {
   "hosting": [
     {
-      "target": "portolab",
       "public": "build",
       "site": "portolab",
+      "redirects": [
+        {
+          "source": "**",
+          "destination": "https://pmt-official.web.app",
+          "type": 301
+        }
+      ],
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -17,7 +23,6 @@
       ]
     },
     {
-      "target": "pmt-official",
       "public": "build",
       "site": "pmt-official",
       "ignore": [
