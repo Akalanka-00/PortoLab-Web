@@ -44,11 +44,17 @@
                 .form-input {
                     width: 100%;
                     padding: 0.5rem;
-                    border: 1px solid var(--color-light);
-                    background-color: var(--color-light);
+                    border: 2px solid var(--color-separator);
+                    background-color: var(--color-white);
                     border-radius: 5px;
                     font-size: 1rem;
-                    color: var(--color-dark);       
+                    color: var(--color-dark);    
+                    
+                    &:focus{
+                        border: 2px solid var(--color-seperator-focus);
+                        outline: none;
+                        background-color: var(--color-white);
+                    }
                 }
 
                 .skill-icon-img {

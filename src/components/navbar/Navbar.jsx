@@ -7,7 +7,7 @@ import { CiSearch } from 'react-icons/ci'
 import { IoSunnySharp } from 'react-icons/io5'
 import { HiMiniBell } from 'react-icons/hi2'
 import Profile from "../../assets/images/profile.png"
-import { AiOutlineDisconnect } from "react-icons/ai";
+import { RiInformation2Line } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
@@ -62,7 +62,7 @@ const Navbar = () => {
       <div className="navbar-trailing">
 
         <div className="option-panel">
-        <AiOutlineDisconnect  className='option-icon' onClick={()=> navigate("/documentation")}/>
+        <RiInformation2Line   className='option-icon' onClick={()=> navigate("/documentation")}/>
           {theme === 'light' ? <FaMoon onClick={() => toggleTheme('dark')} className='option-icon'></FaMoon > : <IoSunnySharp onClick={() => toggleTheme('light')} className='option-icon' />}
           <HiMiniBell className='option-icon' />
         </div>

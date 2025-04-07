@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './webapis.scss';
 import TokenModal from '../../../components/tokenModal/TokenModal';
 import { TokenAPI } from '../../../api/token/token.api'; // Import your token API service
-import { TbCopy, TbCopyCheckFilled  } from 'react-icons/tb';
+import { TbCopy, TbCopyCheckFilled } from 'react-icons/tb';
+import { SlOptionsVertical } from 'react-icons/sl';
+import Swal from 'sweetalert2';
 
 const WebApisPage = () => {
   const [show, setShow] = useState(false);
@@ -10,6 +12,7 @@ const WebApisPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [copied, setCopied] = useState(-1);
+  const [menuOptionIndex, setMenuOptionIndex] = useState(-1);
 
   const handleTokenModal = () => {
     setShow(true);
@@ -23,6 +26,30 @@ const WebApisPage = () => {
       alert('Failed to copy endpoint.');
     });
   };
+
+  const deleteToken = async (token) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+
+        const api = new TokenAPI();
+        const result = await api.deleteToken(token.id);
+        if (result) {
+          console.log("Token deleted:", result);
+          setTokens(tokens.filter(t => t.id !== token.id)); // Update state to remove deleted token
+          Swal.fire('Deleted!', 'Token has been deleted.', 'success');
+        }
+      }
+    })
+
+  }
 
   useEffect(() => {
     const fetchTokens = async () => {
@@ -40,6 +67,20 @@ const WebApisPage = () => {
     };
 
     fetchTokens();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest('.webapi-options')) {
+        setMenuOptionIndex(-1);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   return (
@@ -67,26 +108,36 @@ const WebApisPage = () => {
                     <th>Token</th>
                     <th>Status</th>
                     <th>Created Date</th>
-                    <th>Expired Date</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   {tokens.map((token, index) => (
-                    <tr key={index}>
-                                            <td>{token.origin}</td>
+                    <tr className='table-row' key={index}>
+                      <td>{token.origin}</td>
 
                       <td className='token-cell'>
                         <div className="token">
-                        *************************</div>
-                      <div className="copy-icon" onClick={() => handleCopy(token.token, index)}>
-                      {copied==index ? <TbCopyCheckFilled /> : <TbCopy />}
-                      </div>
+                          *************************</div>
+                        <div className="copy-icon" onClick={() => handleCopy(token.token, index)}>
+                          {copied == index ? <TbCopyCheckFilled /> : <TbCopy />}
+                        </div>
                       </td>
                       <td className={token.status === 'active' ? 'status-active' : 'status-expired'}>
                         {token.status}
                       </td>
                       <td>{new Date(token.createdDate).toLocaleDateString()}</td>
-                      <td>{new Date(token.expiredDate).toLocaleDateString()}</td>
+                      <td className='webapi-options'>
+                        <div className="webapi-options-wrapper">
+                        <SlOptionsVertical onClick={(e) => { e.stopPropagation(); setMenuOptionIndex(index) }} />
+                        {menuOptionIndex === index && (
+                          <div className="webapi-options-dropdown">
+                            <div className="webapi-option" onClick={() => deleteToken(token)}>Delete</div>
+
+                          </div>
+                        )}
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

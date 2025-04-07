@@ -104,7 +104,7 @@ const TestimonialsPage = () => {
   return (
     <div className="dashboard-content-container testimonial-container">
       {testimonialLoading ? (
-        <div className="loading-spinner">Loading testimonials...</div>
+        <div className="loading-spinner"></div>
       ) : (
         ['Pending', 'Approved', 'Declined'].map((status, index) => {
           const testimonials = status === 'Pending' ? pendingTestimonials : status === 'Approved' ? approvedTestimonials : declinedTestimonials;
@@ -154,8 +154,18 @@ const TestimonialsPage = () => {
 
                                   </div>
                                 )}
+
+
                               </>
                             )}
+
+                            {status === 'Pending' && (
+                              <a href={test.linkedIn} target="_blank" rel="noopener noreferrer" className='linkedin-icon' onClick={(e) => { e.stopPropagation();}}>
+                                LinkedIn
+
+                              </a>
+                            )}
+
                             {status === 'Declined' && (
                               <>
 

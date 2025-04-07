@@ -2,26 +2,29 @@
     padding: 1rem;
     position: sticky;
     background-color: var(--color-white);
-    box-shadow: var(--box-shadow);
+    // box-shadow: var(--box-shadow);
+    border-right: 1px solid var(--color-separator);
 
     &:hover{
         box-shadow: none;
 
     }
     .header{
-        display: inline-block;
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
         gap: 0;
         margin: 0;
         padding: 0;
         line-height: 0;
-        text-align: center;
+        align-items: center;
+        justify-content: flex-start;
 
         .header-icon{
-            font-size: 3rem;
-            color: var(--softTextColor);
-            margin: 0;
-            padding: 0;
+            // font-size: 3rem;
+            // color: var(--softTextColor);
+            // margin: 0;
+            // padding: 0;
+            width: 50px;
         }
     
         .header-text{
@@ -60,28 +63,22 @@
                 transition: all 0.3s ease-in-out;
 
                 &:hover{
-                    color: var(--color-primary);
-
-
-
+                    color: var(--color-white);
+                    background-color: var(--color-primary);
                 }
 
                 .sidebar-icon{
                     font-size: 1rem;
-                    // color: var(--softTextColor);
                 }
 
-
-
                 .sidebar-title{
-                    font-size: 0.9rem;
-                    // color: var(--softTextColor);
+                    font-size: 1rem;
                 }
             }
 
             .sidebar-item.active{
-                color: var(--color-primary);
-                background-color: var(--color-light);
+                color: var(--color-white);
+                background-color: var(--color-primary);
 
             
             }

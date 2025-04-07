@@ -4,8 +4,33 @@
     font-weight: 600;
 }
 
-.token-modal-url-input{
+.token-form-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
+    margin-bottom: 1rem;
 
-    color: var(--color-dark);
+    label{
+        font-size: 1rem;
+        color: var(--color-dark);
+        font-weight: 500;
+        margin-right: 1rem;
+        text-wrap: nowrap;
+    }
+    input{
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid var(--color-separator);
+        border-radius: 4px;
+        font-size: 1rem;
+        color: var(--color-dark);
+        font-weight: 400;
+
+        &:focus{
+            outline: none;
+            border-color: var(--color-seperator-focus);
+        }
+    }
 }
