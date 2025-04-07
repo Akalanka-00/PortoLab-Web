@@ -1,23 +1,17 @@
 {
-  "hosting": [
-    {
-      "target": "portolab",
-      "public": "dist",
-      "rewrites": [],
-      "redirects": [
-        {
-          "source": "**",
-          "destination": "https://pmt-official.web.app",
-          "type": 301
-        }
-      ]
-    },
-    {
-      "target": "pmt-official",
-      "public": "dist",
-      "rewrites": [
-        { "source": "**", "destination": "/index.html" }
-      ]
-    }
-  ]
+  "hosting": {
+    "public": "build",
+    "site": "portolab",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }
