@@ -1,362 +1,260 @@
-import React, { use, useEffect, useState } from 'react';
-import './overview.scss';
+import React, { useEffect, useState } from 'react'
 import { ApiCallAPI } from '../../../api/overview/apicall.api';
+import './overview.scss'
+import { IoMdTrendingUp, IoMdTrendingDown } from "react-icons/io";
+import Growth from "../../../assets/images/growth.png";
 import SparklineChart from '../../../components/charts/sparkLineChart/SparklineChart';
-import { FaArrowTrendDown, FaArrowTrendUp } from 'react-icons/fa6';
-import BarChart from '../../../components/charts/barChart/BarChart';
-import apiDocData from '../../../data/apiDoc.data';
-import { IoSchoolOutline  } from "react-icons/io5";
-import { MdOutlineBusinessCenter  } from "react-icons/md";
-import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { VscDebugDisconnect } from "react-icons/vsc";
-import { useNavigate } from 'react-router-dom';
-
+import LineChart from '../../../components/charts/lineChart/LineChart';
+import PieChart from '../../../components/charts/pieChart/PieChart';
+import Aos from 'aos';
 const OverviewPage = () => {
-  const navigate = useNavigate();
-  const [yesterdayPortfolioVisits, setYesterdayPortfolioVisits] = useState([]);
-  const [lastMonthPortfolioVisits, setLastMonthPortfolioVisits] = useState([]);
-  const [yesterdayApiCalls, setYesterdayApiCalls] = useState([]);
-  const [lastWeekPortfolioVisits, setLastWeekPortfolioVisits] = useState([]);
-  const [lastWeekApiCalls, setLastWeekApiCalls] = useState([]);
-  const [lastMonthApiCalls, setLastMonthApiCalls] = useState([]);
-  const [error, setError] = useState(null);
-  const [topCardData, setTopCardData] = useState([]);
-  const [totalApiCallsTimeRange, setTotalApiCallsTimeRange] = useState('day');
-  const [yesterdayRawData, setYesterdayRawData] = useState([]);
-  const [lastWeekRawData, setLastWeekRawData] = useState([]);
-  const [lastMonthRawData, setLastMonthRawData] = useState([]);
-  const [summary, setSummary] = useState(
-    { categories: [], data: [] }
-  );
-
-
-  const shortcutData = [
-
-    {
-      title: 'It\'s a new project',
-      description: 'Add a new project to your collection',
-      icon: <AiOutlineFundProjectionScreen  />,
-      url: '/dashboard/projects/new'
-    },
-    {
-      title: 'Just learn something new',
-      description: 'Add a new educational experience to your collection',
-      icon: <IoSchoolOutline   />,
-      url: '/dashboard/qualifications/education/new'
-    },
-
-    {
-      title: 'I\'ve got a new job',
-      description: 'Add a new work experience to your collection',
-      icon: <MdOutlineBusinessCenter  ork  />,
-      url: '/dashboard/qualifications/work/new'
-    },
-
-    {
-      title: 'Create a new API token',
-      description: 'Create a new API token for your collection',
-      icon: <VscDebugDisconnect  />,
-      url: '/dashboard/webapi'
-    }
-  ];
   const apiCallAPI = new ApiCallAPI();
+  const [fetchedData, setFetchedData] = useState({ today_data: [], last_week_data: [], last_month_data: [] });
 
-  // Process API data for chart visualization
-  const processDataForChart = (range, rawData, filterBy = null) => {
-    let filteredData = filterBy ? rawData.filter(record => record.apiName === filterBy) : rawData;
-    let chartData = [];
+  const fetchDataByTimeRange = async () => {
+    const fetchedData_today = await apiCallAPI.getByTimeRange('yesterday');
+    const fetchedData_last_week = await apiCallAPI.getByTimeRange('last_week');
+    const fetchedData_last_month = await apiCallAPI.getByTimeRange('last_month');
+    const data = { today_data: labelizeFetchedData(fetchedData_today), last_week_data: labelizeFetchedData(fetchedData_last_week), last_month_data: labelizeFetchedData(fetchedData_last_month) };
+    const mocData = generateTimeBasedData();
+    const finalizedData = {
+      today_data: [...mocData.today_data, ...fetchedData_today].sort((a, b) => new Date(b.calledAt) - new Date(a.calledAt)),
+      last_week_data: [...mocData.last_week_data, ...fetchedData_last_week].sort((a, b) => new Date(b.calledAt) - new Date(a.calledAt)),
+      last_month_data: [...mocData.last_month_data, ...fetchedData_last_month].sort((a, b) => new Date(b.calledAt) - new Date(a.calledAt))
+    };
+    console.log(finalizedData);
+    setFetchedData(finalizedData);
+  }
+
+  const labelizeFetchedData = (data) => {
+    data.forEach((item) => {
+      item.status = true;
+    });
+    return data;
+  }
+
+  function generateTimeBasedData() {
     const now = new Date();
+    const today_data = [];
+    const last_week_data = [];
+    const last_month_data = [];
 
-    if (range === 'yesterday') {
-      chartData = new Array(24).fill(0);
-      const startDate = new Date(now);
-      startDate.setHours(startDate.getHours(), 0, 0, 0);
-      startDate.setDate(startDate.getDate() - 1);
+    for (let i = 0; i < 24; i++) {
+      const date = new Date(now.setHours(now.getHours() - i));
+      today_data.push({ calledAt: date.toISOString(), apiName: "moc-api", status: false, deviceType: null });
+    }
+
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(now.setDate(now.getDate() - i));
+      last_week_data.push({ calledAt: date.toISOString(), apiName: "moc-api", status: false, deviceType: null });
+    }
+
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(now.setDate(now.getDate() - i));
+      last_month_data.push({ calledAt: date.toISOString(), apiName: "moc-api", status: false, deviceType: null });
+    }
+
+    return {
+      today_data: today_data,
+      last_week_data: last_week_data,
+      last_month_data: last_month_data,
+    }
+
+  }
+
+
+  const calculateTodayGap = (data) => {
+    if (data.length === 0) {
+      return 0;
+    }
+    data.sort((a, b) => new Date(a.calledAt) - new Date(b.calledAt));
+    const firstDate = new Date(data[0].calledAt);
+    const lastDate = new Date(data[data.length - 1].calledAt);
+    let firstDataCount = 0;
+    let lastDataCount = 0;
+    data.forEach((item) => {
+      if (new Date(item.calledAt).getHours() === firstDate.getHours() && new Date(item.calledAt).getDate() === firstDate.getDate()) {
+        firstDataCount++;
+      }
+      if (new Date(item.calledAt).getHours() === lastDate.getHours() && new Date(item.calledAt).getDate() === lastDate.getDate()) {
+        lastDataCount++;
+      }
+    });
+
+    const gap = lastDataCount - firstDataCount;
+    return gap;
+
+  }
+
+  const generateSparklineTodayData = (data) => {
+    const sparklineData = [];
+    const today = new Date();
+    for (let i = 0; i < 24; i++) {
+      const date = new Date(today.setHours(today.getHours() - i));
+      const filteredData = data.filter(item => new Date(item.calledAt).getHours() === date.getHours() && new Date(item.calledAt).getDate() === date.getDate() && item.status == true && item.apiName === "portfolio-visit-api");
+      const count = filteredData.length;
+      sparklineData.push(count);
+    }
+    sparklineData.reverse();
+    return sparklineData;
+
+  }
+
+  const transformDataToChartFormat = (range = "today") => {
+    const categories = [];
+    const seriesData = [];
+    const data = range === "today" ? fetchedData.today_data : range === "last_week" ? fetchedData.last_week_data : fetchedData.last_month_data;
+    const deviceTypes = [...new Set(data.map(record => record.deviceType).filter(deviceType => deviceType != null))];
+    const series = deviceTypes.map(deviceType => ({
+      name: deviceType,
+      data: new Array(range === "today" ? 24 : range === "last_week" ? 7 : 30).fill(0),
+      colors: []
+    }));
+
+    if (range === "today") {
       for (let i = 0; i < 24; i++) {
-        const currentHourDate = new Date(startDate);
-        currentHourDate.setHours(startDate.getHours() + i); // Increment hour by i
-
-        filteredData.forEach(record => {
-          const apidate = new Date(record.calledAt);
-          if (apidate.getHours() === currentHourDate.getHours() && apidate.getDate() === currentHourDate.getDate()) {
-            chartData[i] += 1;
-          }
+        const date = new Date();
+        date.setHours(date.getHours() - i);
+        categories.push(`${date.getHours()}:00`);
+        series.forEach((deviceType) => {
+          const filteredData = data.filter(record => new Date(record.calledAt).getHours() === date.getHours() && new Date(record.calledAt).getDate() === date.getDate() && record.deviceType === deviceType.name && record.status === true);
+          deviceType.data[i] = filteredData.length;
         });
       }
-
-    } else if (range === 'last_week') {
-      chartData = new Array(7).fill(0);
-      const startDate = new Date(now);
-      startDate.setDate(startDate.getDate() - 7);
+    } else if (range === "last_week") {
       for (let i = 0; i < 7; i++) {
-        const currentWeekDate = new Date(startDate);
-        currentWeekDate.setDate(startDate.getDate() + i); // Increment date by i
-
-        filteredData.forEach(record => {
-          const apidate = new Date(record.calledAt);
-          if (apidate.getDate() === currentWeekDate.getDate() && apidate.getMonth() === currentWeekDate.getMonth()) {
-            chartData[i] += 1;
-          }
+        const date = new Date();
+        date.setHours(date.getDate() - i);
+        categories.push(`${date.getDate()}-${date.getMonth() + 1}`);
+        series.forEach((deviceType) => {
+          const filteredData = data.filter(record => new Date(record.calledAt).getDate() === date.getDate() && new Date(record.calledAt).getMonth() === date.getMonth() && record.deviceType === deviceType.name && record.status === true);
+          deviceType.data[i] = filteredData.length;
         });
       }
     }
 
-    else if (range === 'last_month') {
-      const arrSize = 31;
-      chartData = new Array(arrSize).fill(0);
-      const startDate = new Date(now);
-      startDate.setDate(startDate.getDate() - arrSize);
-      for (let i = 0; i < arrSize; i++) {
-        const currentMonthDate = new Date(startDate);
-        currentMonthDate.setDate(startDate.getDate() + i); // Increment date by i
-        // console.log(i, 'currentMonthDate', currentMonthDate);
-        filteredData.forEach(record => {
-          const apidate = new Date(record.calledAt);
-          console.log(`apidate: ${apidate.getDate()} ${apidate.getMonth()}`, `currentMonthDate: ${currentMonthDate.getDate()} ${currentMonthDate.getMonth()}`);
-          if (apidate.getDate() === currentMonthDate.getDate() && apidate.getMonth() === currentMonthDate.getMonth()) {
-            chartData[i] += 1;
-          }
+    else if (range === "last_month") {
+      for (let i = 0; i < 30; i++) {
+        const date = new Date();
+        date.setHours(date.getDate() - i);
+        categories.push(`${date.getDate()}-${date.getMonth() + 1}`);
+        series.forEach((deviceType) => {
+          const filteredData = data.filter(record => new Date(record.calledAt).getDate() === date.getDate() && new Date(record.calledAt).getMonth() === date.getMonth() && record.deviceType === deviceType.name && record.status === true);
+          deviceType.data[i] = filteredData.length;
         });
       }
-
-      console.log("\n\n")
-
-      // chartData = new Array(31).fill(0);
-      // filteredData.forEach(record => {
-      //   const dayOfMonth = new Date(record.calledAt).getUTCDate();
-      //   chartData[dayOfMonth - 1] += 1;
-      // });
     }
-    return chartData;
-  };
+    categories.reverse();
+    series.forEach((deviceType) => {
+      deviceType.data = deviceType.data.reverse();
 
-
-  // Fetch data and filter for Portfolio Visits & API Calls
-  const fetchDataByTimeRange = async (range) => {
-    try {
-      const fetchedData = await apiCallAPI.getByTimeRange(range);
-      if (fetchedData) {
-        const portfolioVisits = processDataForChart(range, fetchedData, 'portfolio-visit-api');
-        const apiCalls = processDataForChart(range, fetchedData);
-
-        if (range === 'yesterday') {
-          setYesterdayPortfolioVisits(portfolioVisits);
-          setYesterdayApiCalls(apiCalls);
-          setYesterdayRawData(fetchedData);
-        } else if (range === 'last_week') {
-          setLastWeekPortfolioVisits(portfolioVisits);
-          setLastWeekApiCalls(apiCalls);
-          setLastWeekRawData(fetchedData);
-        }
-        else if (range === 'last_month') {
-          setLastMonthPortfolioVisits(portfolioVisits);
-          setLastMonthApiCalls(apiCalls);
-          setLastMonthRawData(fetchedData);
-        }
-      } else {
-        setError('Failed to fetch data');
-      }
-    } catch (error) {
-      setError('Error fetching data');
+    });
+    console.log(categories, series);
+    return {
+      categories,
+      seriesData: series
     }
   };
 
-  // Fetch data on component mount
+  const transformDataToPieFormat = (range = "today") => {
+
+    const data = range === "today" ? fetchedData.today_data : range === "last_week" ? fetchedData.last_week_data : fetchedData.last_month_data;
+    const apiTypes = [...new Set(data.map(record => record.apiName).filter(apiName => apiName != null))];
+    const series = apiTypes.map(apiName => ({
+      name: apiName,
+      y: data.filter(record => record.apiName === apiName && record.status === true).length,
+    }));
+    return series;
+  };
+
+
+
   useEffect(() => {
-    fetchDataByTimeRange('yesterday');
-    fetchDataByTimeRange('last_week');
-    fetchDataByTimeRange('last_month');
+    fetchDataByTimeRange();
+    Aos.init();
+    Aos.refresh();
   }, []);
-
-  // Update Top Card Data whenever state updates
-  useEffect(() => {
-    setTopCardData([
-      {
-        title: 'Last 24h Portfolio Visits',
-        value: yesterdayPortfolioVisits.length > 0 ? yesterdayPortfolioVisits[yesterdayPortfolioVisits.length - 1] : 0,
-        total: yesterdayPortfolioVisits.reduce((a, b) => a + b, 0),
-        data: yesterdayPortfolioVisits,
-        efficiency:
-          (((yesterdayPortfolioVisits[yesterdayPortfolioVisits.length - 1] - yesterdayPortfolioVisits[0]) /
-            yesterdayPortfolioVisits.reduce((a, b) => a + b, 0)) *
-            100
-          ).toFixed(0)
-        ,
-      },
-      {
-        title: 'Last Month Portfolio Visits',
-        value: lastMonthPortfolioVisits.length > 0 ? lastMonthPortfolioVisits[lastMonthPortfolioVisits.length - 1] : 0,
-        total: lastMonthPortfolioVisits.reduce((a, b) => a + b, 0),
-        data: lastMonthPortfolioVisits,
-        efficiency:
-          (((lastMonthPortfolioVisits[lastMonthPortfolioVisits.length - 1] - lastMonthPortfolioVisits[0]) /
-            lastMonthPortfolioVisits.reduce((a, b) => a + b, 0)) *
-            100
-          ).toFixed(0)
-
-      },
-      {
-        title: 'Last 24h Total API Calls',
-        value: yesterdayApiCalls.length > 0 ? yesterdayApiCalls[yesterdayApiCalls.length - 1] : 0,
-        total: yesterdayApiCalls.reduce((a, b) => a + b, 0),
-        data: yesterdayApiCalls,
-        efficiency:
-          (((yesterdayApiCalls[yesterdayApiCalls.length - 1] - yesterdayApiCalls[0]) / yesterdayApiCalls.reduce((a, b) => a + b, 0)) * 100).toFixed(0)
-
-      },
-      {
-        title: 'Last Month API Calls',
-        value: lastMonthApiCalls.length > 0 ? lastMonthApiCalls[lastMonthApiCalls.length - 1] : 0,
-        total: lastMonthApiCalls.reduce((a, b) => a + b, 0),
-        data: lastMonthApiCalls,
-        efficiency:
-          (((lastMonthApiCalls[lastMonthApiCalls.length - 1] - lastMonthApiCalls[0]) / lastMonthApiCalls.reduce((a, b) => a + b, 0)) * 100).toFixed(0)
-        ,
-      },
-    ]);
-  }, [yesterdayPortfolioVisits, lastMonthPortfolioVisits, yesterdayApiCalls, lastMonthApiCalls]);
-
-  useEffect(() => {
-    if (yesterdayRawData.length > 0) {
-      const apiNames = [...new Set(yesterdayRawData.map(item => item.apiName))];
-      const data = apiNames.map(apiName =>
-        yesterdayRawData.filter(item => item.apiName === apiName).length
-      );
-      const categories = apiNames.map(apiName => apiName = apiDocData.find(item => item.name === apiName).title);
-
-
-      setSummary({ categories, data }); // Properly updating state
-    }
-  }, [yesterdayRawData]);
-
-  const totalApiCallsTimeRangeHandler = (event) => {
-    const timeRange = event.target.value;
-    console.log('Time Range:', timeRange);
-
-    let apiCallData = [];
-    switch (timeRange) {
-      case 'day':
-        apiCallData = yesterdayRawData;
-        break;
-      case 'week':
-        apiCallData = lastWeekRawData;
-        break;
-      case 'month':
-        apiCallData = lastMonthRawData;
-        break;
-      default:
-        apiCallData = yesterdayRawData;
-    }
-
-    if (apiCallData.length > 0) {
-      const apiNames = [...new Set(apiCallData.map(item => item.apiName))];
-      const data = apiNames.map(apiName =>
-        apiCallData.filter(item => item.apiName === apiName).length
-      );
-      const categories = apiNames.map(apiName => apiName = apiDocData.find(item => item.name === apiName).title);
-
-
-      setSummary({ categories, data });
-    }
-    setTotalApiCallsTimeRange(timeRange);
-  };
-
-
   return (
-    <div className="overview-container">
-      {error && <div className="error">{error}</div>}
+    <div className='dashboard-overview-container'>
+      <div className="overview-cards">
 
-      <div className="top-cards-container">
-        {topCardData.map((data, index) => {
-          console.log(data);
-          const status = data.efficiency > 0;
-          if (data.total > 0) {
-            return (
-              <div key={index} className="top-card">
-                <div className="header">
-                  <div className="card-title">{data.title}</div>
-                </div>
-                <div className="content">
-                  <div className="values">
-                    <div className="value">{data.value}</div>
-                    <div className="total">
-                      Total: <span>{data.total}</span>
-                    </div>
-                  </div>
+        <div className="portfolio-visit-container" data-aos="flip-left" data-aos-duration="1000">
+          <div className="portfolio-visit-content">
 
-                  <div className="chart">
-                    <SparklineChart data={data.data} />
-                  </div>
+            <div className="portfolio-visit-left-content">
+              <div className="portfolio-visit-title">
+                How Many People Found You in last 24 Hours
+              </div>
+
+              <div className="portfolio-vsit-data-container">
+                <div className="portfolio-visit-data">
+                  <div className="visit-value">{fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true).length} <span>{calculateTodayGap(fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true)) >= 0 ? <IoMdTrendingUp /> : <IoMdTrendingDown />}</span></div>
+                  <div className="visit-title">Users visit your portfolio</div>
                 </div>
-                <div className="footer">
-                  <div className="trend-icon">
-                    {status ? <FaArrowTrendUp className="trend-up" /> : <FaArrowTrendDown className="trend-down" />}
+
+                <div className="portfolio-visit-data">
+                  <div className="visit-value">
+                    {[
+                      ...new Set(
+                        fetchedData.today_data
+                          .filter(data => data.apiName === "portfolio-visit-api" && data.status === true)
+                          .map(data => data.deviceId)
+                      )
+                    ].length}
+                    <span>
+                      {calculateTodayGap(
+                        fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true)
+                      ) >= 0 ? (
+                        <IoMdTrendingUp />
+                      ) : (
+                        <IoMdTrendingDown />
+                      )}
+                    </span>
                   </div>
-                  <div className={`efficiency ${status ? 'trend-up' : 'trend-down'}`}>
-                    {data.efficiency}% <span>than last period</span>
-                  </div>
+                  <div className="visit-title">New Users visit your portfolio</div>
                 </div>
               </div>
-            );
-          } else {
-            return (
-              <div key={index} className="top-card">
-                <div className="header">
-                  <div className="card-title">{data.title}</div>
-                </div>
-                <div className="content">
-                  <div className="no-data-top-card"><span>No data available</span></div>
-                </div>
 
-              </div>
-            );
-          }
-        })}
-      </div>
-      <div className="second-cards-container">
-        <div className="summary-views">
-          <div className="header">
-            <div className="header-name">
-              <div className="chart-title">Total API calls</div>
             </div>
-            <select name='time-duratin' id='time-duratin' className="header-filter" onChange={totalApiCallsTimeRangeHandler} value={totalApiCallsTimeRange}>
-              <option value="day">Today</option>
-              <option value="week">Last Week</option>
-              <option value="month">Last Month</option>
-            </select>
+            <div className="portfolio-visit-right-content">
+              <img src={Growth} alt="growth" />
+            </div>
+
+
           </div>
 
-          <div className="api-summary-container">
-            <BarChart categories={summary.categories} data={summary.data} />
+
+        </div>
+
+        <div className="portfolio-growth-card">
+          <div className="portfolio-growth-title">Portfolio Growth in Last 24h</div>
+          <div className="portfolio-growth-data">
+            <SparklineChart data={generateSparklineTodayData(fetchedData.today_data)} />
+          </div>
+        </div>
+      </div>
+      <div className="overview-chart-container">
+        <div className="device-type-chart-container">
+          <div className="overview-chart-title">Overview Chart</div>
+          <div className="overview-chart-data">
+            <LineChart data={transformDataToChartFormat("today")} />
           </div>
         </div>
 
-        <div className="dashboard-shortcuts">
-          <div className="header">
-            <div className="header-title">Quick Actions</div>
-          </div>
-          <div className="shortcuts-container">
-
-            {shortcutData.map((data, index) => {
-              return (
-                <div key={index} className="shortcut" onClick={()=>navigate(data.url)}>
-                  <div className="shortcut-icon">
-                    {data.icon}
-                  </div>
-                  <div className="shortcut-content">
-                    <div className="shortcut-title">{data.title}</div>
-                    {/* <div className="shortcut-description">{data.description}</div> */}
-                  </div>
-                </div>
-              );
-            })}
-
+        <div className="api-request-type-container">
+          <div className="overview-chart-title">Last 24h API Usage Summary</div>
+          <div className="overview-chart-data">
+            <PieChart
+              title=""
+              subtitle=""
+              data={transformDataToPieFormat("today")}
+            />
           </div>
         </div>
       </div>
 
     </div>
-  );
-};
+  )
+}
 
-export default OverviewPage;
+export default OverviewPage
