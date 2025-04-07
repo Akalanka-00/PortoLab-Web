@@ -1,27 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./homeNavbar.scss"
 import { useNavigate } from 'react-router-dom'
 import Logo from "../../assets/images/logo.png"
+import { MdOutlineMenu } from 'react-icons/md'
+import { BiX } from 'react-icons/bi'
 const HomeNavbar = () => {
 
   const navigate = useNavigate();
+  const [mobileNavActive, setMobileNavActive] = useState(false);
+
+  useEffect(() => {
+    if (mobileNavActive) {
+      document.body.classList.add('mobile-nav-active');
+    } else {
+      document.body.classList.remove('mobile-nav-active');
+    }
+  }, [mobileNavActive]);
+
+  const toggleMobileNav = () => {
+    setMobileNavActive((prev) => !prev);
+  };
+
   return (
-    // <div className='home-navbar-container'>
-    //   <div className="home-navbar-logo">PMT</div>
-    //   <div className="home-navbar-items">
-    //     <div className="home-navbar-item" onClick={()=> navigate("/")}>Home</div>
-    //     <div className="home-navbar-item">About Us</div>
-    //     <div className="home-navbar-item" onClick={()=> navigate("/documentation")}>Documentation</div>
-    //     <div className="home-navbar-item">Contact Us</div>
-    //   </div>
-    //   <div className="home-navbar-login">
-    //     {/* <div className="home-navbar-login-button" onClick={()=> navigate("/login")}>Login</div> */}
-    //     <div className="home-navbar-login-button" onClick={()=> navigate("/register")}>Get Start</div>
-    //   </div>
-    //     </div>
-
-
-
     <header id="header" className="home-navbar d-flex align-items-center sticky-top">
       <div className="container-fluid navbar-container-xl position-relative d-flex align-items-center">
 
@@ -47,11 +47,15 @@ const HomeNavbar = () => {
 
 
             <li><div className='navitem'>Contact</div></li>
+            <div className="btn-getstarted" onClick={() => navigate("/register")}>Get Started</div>
+
           </ul>
-          <i className="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          <div className='mobile-nav-toggle d-xl-none'  onClick={toggleMobileNav}>
+            {mobileNavActive ? <BiX className='mobile-nav-icon' size={30} /> : <MdOutlineMenu className='mobile-nav-icon' size={30} />}
+          </div>
+   
         </nav>
 
-        <div className="btn-getstarted" onClick={() => navigate("/register")}>Get Started</div>
 
       </div>
     </header>
