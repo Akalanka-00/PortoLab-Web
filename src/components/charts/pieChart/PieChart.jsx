@@ -72,10 +72,13 @@ import HighchartsReact from "highcharts-react-official";
 // React Component
 const PieChart = ({ title = "API Usage Summary", subtitle = "By percentage", data }) => {
   const isDataAvailable = Array.isArray(data) && data.length > 0;
+  const isDataZero = data.every(item => item.y === 0);
+  const isDataEmpty = data.every(item => item.y === null || item.y === undefined);
 
-  if (!isDataAvailable) {
+
+  if (!isDataAvailable || isDataZero || isDataEmpty) {
     return (
-      <div style={{ textAlign: "center", padding: "2rem", fontWeight: "bold", color: "#999" }}>
+      <div style={{ textAlign: "center", padding: "2rem",  color: "var(--color-dark)" }}>
         No data available
       </div>
     );

@@ -42,6 +42,24 @@ const SparklineChart = ({ data }) => {
     },
   };
 
+  const isDataAvailable =
+  Array.isArray(data) && data.length > 0 && data.some(val => val !== 0);
+
+if (!isDataAvailable) {
+  return (
+    <div style={{
+      textAlign: "center",
+      padding: "1rem",
+      fontSize: "0.9rem",
+      color: "var(--color-dark)",
+      padding: "2rem"
+    }}>
+      No data available
+    </div>
+  );
+}
+
+
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 };
 

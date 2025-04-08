@@ -7,12 +7,12 @@ const LineChart = ({ data }) => {
   // Check if all data values are 0
   const {categories, seriesData} = data;
   if(!seriesData) {
-    return <div style={{ textAlign: "center", fontSize: "16px", color: "var(--color-dark)" }}>No series available</div>;
+    return <div style={{ textAlign: "center", fontSize: "16px", color: "var(--color-dark)", padding: "2rem" }}>No series available</div>;
   }
   const isDataEmpty = seriesData.every(series => series.data.every(value => value === 0));
 
   if (isDataEmpty) {
-    return <div style={{ textAlign: "center", fontSize: "16px", color: "var(--color-dark)" }}>No data available</div>;
+    return <div style={{ textAlign: "center", fontSize: "16px", color: "var(--color-dark)", padding: "2rem" }}>No data available</div>;
   }
 
   const options = {
