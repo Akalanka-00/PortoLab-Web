@@ -7,6 +7,7 @@ import SparklineChart from '../../../components/charts/sparkLineChart/SparklineC
 import LineChart from '../../../components/charts/lineChart/LineChart';
 import PieChart from '../../../components/charts/pieChart/PieChart';
 import Aos from 'aos';
+import apiDocData from '../../../data/apiDoc.data';
 const OverviewPage = () => {
   const apiCallAPI = new ApiCallAPI();
   const [fetchedData, setFetchedData] = useState({ today_data: [], last_week_data: [], last_month_data: [] });
@@ -159,9 +160,9 @@ const OverviewPage = () => {
   const transformDataToPieFormat = (range = "today") => {
 
     const data = range === "today" ? fetchedData.today_data : range === "last_week" ? fetchedData.last_week_data : fetchedData.last_month_data;
-    const apiTypes = [...new Set(data.map(record => record.apiName).filter(apiName => apiName != null))];
+    const apiTypes = [...new Set(data.map(record => record.apiName).filter(apiName => apiName != null && apiName !== "moc-api"))];
     const series = apiTypes.map(apiName => ({
-      name: apiName,
+      name: apiDocData.find(api => api.name === apiName)?.title || apiName,
       y: data.filter(record => record.apiName === apiName && record.status === true).length,
     }));
     return series;
