@@ -118,11 +118,11 @@ const AuthPage = () => {
                                 </div>
                             <div className="input-field">
                                 <i className="fas fa-user"></i>
-                                <input type="text" placeholder="Last Name"  id="fname" name='fname' onChange={handleChange} value={formValues.fname} autoFocus required />
+                                <input type="text" placeholder="Last Name"  id="lname" name='lname' onChange={handleChange} value={formValues.lname} autoFocus required />
                                 </div>
                         <div className="input-field">
                             <i className="fas fa-envelope"></i>
-                            <input type="email" placeholder="Email" id="fname" name='fname' onChange={handleChange} value={formValues.fname} autoFocus required />
+                            <input type="email" placeholder="Email" id="email" name='email' onChange={handleChange} value={formValues.email} autoFocus required />
                             </div>
                         <div className="input-field">
                             <i className="fas fa-lock"></i>
@@ -132,7 +132,7 @@ const AuthPage = () => {
                             <i className="fas fa-lock"></i>
                             <input type="password" placeholder="Confirm Password"  id="confirm-password" name='confirmPassword' onChange={handleChange} value={formValues.confirmPassword} required />
                             </div>
-                        <input type="submit" className="auth-btn" value="Sign Up" />
+                        <input type="submit" onClick={handleSubmit} className="auth-btn" value="Sign Up" />
                         <p className="social-text">Or Sign up with social platforms</p>
                         <div className="social-media">
                            <GoogleSignInBtn text="Sign Up with Google" />
