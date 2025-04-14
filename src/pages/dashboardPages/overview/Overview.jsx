@@ -189,7 +189,7 @@ const OverviewPage = () => {
 
               <div className="portfolio-vsit-data-container">
                 <div className="portfolio-visit-data">
-                  <div className="visit-value">{fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true).length} <span>{calculateTodayGap(fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true)) >= 0 ? <IoMdTrendingUp /> : <IoMdTrendingDown />}</span></div>
+                  <div className="visit-value">{fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true).length} <span>{calculateTodayGap(fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true)) >= 0 ? <IoMdTrendingUp style={{color:"var(--color-success)"}}/> : <IoMdTrendingDown style={{color:"var(--color-danger)"}}/>}</span></div>
                   <div className="visit-title">Users visit your portfolio</div>
                 </div>
 
@@ -206,9 +206,9 @@ const OverviewPage = () => {
                       {calculateTodayGap(
                         fetchedData.today_data.filter(data => data.apiName === "portfolio-visit-api" && data.status === true)
                       ) >= 0 ? (
-                        <IoMdTrendingUp />
+                        <IoMdTrendingUp style={{color:"var(--color-success)"}}/>
                       ) : (
-                        <IoMdTrendingDown />
+                        <IoMdTrendingDown  style={{color:"var(--color-danger)"}}/>
                       )}
                     </span>
                   </div>

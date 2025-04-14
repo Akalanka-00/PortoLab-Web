@@ -116,7 +116,8 @@ const PieChart = ({ title = "API Usage Summary", subtitle = "By percentage", dat
           enabled: true,
           format: "<span>{point.name}</span><br>{point.percentage:.1f}%",
           distance: 20,
-          style: { color: "var(--color-dark)", fontWeight: "600" }
+          style: { color: "var(--color-dark)", fontWeight: "bold", textOutline: "none" },
+          
         }
       }
     },
