@@ -50,13 +50,13 @@ const apiDocData = [
         response: {
             status: 200,
             body: {
-                "email": "johndoe@gmail.com", 
-                "fname": "John", 
-                "lname": "Doe", 
-                "profile": "https://example.com/profile.jpg", 
-                "phone": "123-456-7890", 
-                "address": "1234 Elm Street", 
-                "cv": "https://example.com/cv.pdf", 
+                "email": "johndoe@gmail.com",
+                "fname": "John",
+                "lname": "Doe",
+                "profile": "https://example.com/profile.jpg",
+                "phone": "123-456-7890",
+                "address": "1234 Elm Street",
+                "cv": "https://example.com/cv.pdf",
                 "bio": "I am the owner of this portfolio website."
             }
         }
@@ -69,26 +69,26 @@ const apiDocData = [
         method: "POST",
         endpoint: "/api/public/visits/{deviceId}",
         headers: {
-          "Authorization": "Bearer YOUR_API_TOKEN"
+            "Authorization": "Bearer YOUR_API_TOKEN"
         },
         parameters: {
-          path: [
-            {
-              name: "deviceId",
-              type: "string",
-              description: "A unique identifier for the device visiting the portfolio. This is used to track visits from different devices. If no device ID is available, an empty string can be used.",
-              required: true,
-              example: "1234567890abcdef"
-            }
-          ]
+            path: [
+                {
+                    name: "deviceId",
+                    type: "string",
+                    description: "A unique identifier for the device visiting the portfolio. This is used to track visits from different devices. If no device ID is available, an empty string can be used.",
+                    required: true,
+                    example: "1234567890abcdef"
+                }
+            ]
         },
         response: {
-          status: 200,
-          body: {} // No content response
+            status: 200,
+            body: {} // No content response
         }
-      },
+    },
 
-      {
+    {
         title: "Get user skills",
         name: "skills-api",
         description: "Fetches the public skills of a user based on the provided API Token.",
@@ -190,7 +190,9 @@ const apiDocData = [
                 "email": "johndoe@gmail.com",
                 "review": "John Doe is a great person to work with. Highly recommended!",
                 "profile": "https://example.com/profile.jpg",
-                "linkedIn": "https://www.linkedin.com/in/johndoe/"
+                "linkedIn": "https://www.linkedin.com/in/johndoe/",
+                "workPlace": "Example Corp",
+                "position": "Software Engineer",
             }
         },
         response: {
@@ -202,6 +204,8 @@ const apiDocData = [
                 "review": "John Doe is a great person to work with. Highly recommended!",
                 "profile": "https://example.com/profile.jpg",
                 "linkedIn": "https://www.linkedin.com/in/johndoe/",
+                "workPlace": "Example Corp",
+                "position": "Software Engineer",
             }
         }
     },
@@ -228,6 +232,8 @@ const apiDocData = [
                     "review": "John Doe is a great person to work with. Highly recommended!",
                     "profile": "https://example.com/profile.jpg",
                     "linkedIn": "https://www.linkedin.com/in/johndoe/",
+                    "workPlace": "Example Corp",
+                    "position": "Software Engineer",
                 }
             ]
         }
