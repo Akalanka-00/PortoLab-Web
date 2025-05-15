@@ -52,9 +52,9 @@ class BaseAPI {
   handleError(error) {
     console.error('API Error:', error);
     if(error.status === 401) {
-      // localStorage.removeItem('token');
-      // localStorage.removeItem('user');
-      // window.location.href = '/login';
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
     }
     if (error.response) {
       console.error('API Response Error:', error.response.data);
